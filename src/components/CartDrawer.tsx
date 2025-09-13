@@ -1,3 +1,4 @@
+// src/components/CartDrawer.tsx
 import React from 'react';
 import { X, Trash2, Plus, Minus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -10,6 +11,10 @@ const CartDrawer: React.FC = () => {
 
   const handleDec = (id: string, qty: number) => setQty(id, Math.max(1, qty - 1));
   const handleInc = (id: string, qty: number) => setQty(id, qty + 1);
+
+  // url actual solo si estamos en el browser (evita warnings en SSR/build)
+  const currentUrl =
+    typeof window !== 'undefined' ? window.location.href : '/';
 
   return (
     <div
@@ -108,7 +113,7 @@ const CartDrawer: React.FC = () => {
           <div className="flex gap-2">
             <button
               onClick={clear}
-              disabled={!items.length}
+              disabled={items.length === 0}
               className="flex-1 bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-lg font-bold disabled:opacity-50"
             >
               {t('cart.clear')}
@@ -116,14 +121,15 @@ const CartDrawer: React.FC = () => {
 
             {/* Affirm para TODO el carrito */}
             <div className="flex-1">
-              {items.length && totalUSD > 0 ? (
+              {items.length > 0 && (Number(totalUSD) || 0) > 0 ? (
                 <AffirmButton
                   cartItems={items.map(it => ({
                     name: it.name,
                     price: Number(it.price),
                     qty: Number(it.qty),
                     sku: String(it.sku || it.id),
-                    url: String(it.url || window.location.href),
+                    url: String(it.url || currentUrl),
+                    image: it.image,
                   }))}
                   totalUSD={Number(totalUSD)}
                 />

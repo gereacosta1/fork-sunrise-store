@@ -23,7 +23,7 @@ const safe = (o) => {
 };
 
 // ⚙️ En prod conviene capturar para que luego se “fundee”
-const CAPTURE = true;
+const CAPTURE = false;
 
 export async function handler(event) {
   // Preflight

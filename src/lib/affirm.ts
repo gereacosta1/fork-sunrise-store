@@ -6,17 +6,9 @@ declare global {
   }
 }
 
-/** Devuelve la CDN correcta para Affirm según env ('prod' o 'sandbox') */
-function getAffirmCdn(env: 'prod' | 'sandbox') {
-  return env === 'prod'
-    ? 'https://cdn1.affirm.com/js/v2/affirm.js'
-    : 'https://cdn1-sandbox.affirm.com/js/v2/affirm.js';
-}
-
 /**
- * Carga Affirm con entorno FORZADO por VITE_AFFIRM_ENV (prod|sandbox).
- * Si VITE_AFFIRM_ENV no está, por defecto usamos **prod**.
- * Además limpia cualquier script previo de affirm que no coincida con el elegido.
+ * Carga Affirm **siempre en producción**.
+ * (Usamos el CDN de prod para evitar errores de clave pública inválida).
  */
 export function loadAffirm(publicKey: string): Promise<void> {
   return new Promise<void>((resolve, reject) => {
@@ -26,22 +18,23 @@ export function loadAffirm(publicKey: string): Promise<void> {
       return;
     }
 
-    // ⚠️ Forzamos a usar VITE_AFFIRM_ENV si existe, y si no, PROD por defecto
-    const raw = (import.meta as any)?.env?.VITE_AFFIRM_ENV ?? 'prod';
-    const env = String(raw).toLowerCase() === 'sandbox' ? 'sandbox' : 'prod';
-    const scriptUrl = getAffirmCdn(env);
+    // CDN de producción (forzado)
+    const scriptUrl = 'https://cdn1.affirm.com/js/v2/affirm.js';
 
-    // Limpia scripts previos de Affirm si no coinciden
-    const existing = document.querySelectorAll<HTMLScriptElement>('script[src*="affirm.com/js/v2/affirm.js"]');
+    // Elimina scripts previos de Affirm que no coincidan
+    const existing = document.querySelectorAll<HTMLScriptElement>(
+      'script[src*="affirm.com/js/v2/affirm.js"]'
+    );
     existing.forEach(s => {
       if (s.src !== scriptUrl) s.remove();
     });
-    // reset del objeto affirm si vino de otro script
+
+    // Si existe un affirm viejo (por sandbox, etc.), reseteamos
     if ((window as any).affirm && (window as any)._affirm_config?.script !== scriptUrl) {
       (window as any).affirm = undefined;
     }
 
-    // Si ya está correcto, resolvemos
+    // Si ya está cargado el correcto, resolvemos
     if (window.affirm?.ui && window._affirm_config?.script === scriptUrl) {
       try {
         window.affirm.ui.ready(() => resolve());
@@ -51,7 +44,7 @@ export function loadAffirm(publicKey: string): Promise<void> {
       return;
     }
 
-    // Configuración e inyección
+    // Configuración + inyección del script
     window._affirm_config = {
       public_api_key: publicKey,
       script: scriptUrl,
@@ -59,7 +52,7 @@ export function loadAffirm(publicKey: string): Promise<void> {
       country_code: 'US',
     };
 
-    console.log('[Affirm] env:', env, 'cdn:', scriptUrl, 'pk:', publicKey?.slice(0, 6) + '…');
+    console.log('[Affirm] env: prod cdn:', scriptUrl, 'pk:', publicKey.slice(0, 6) + '…');
 
     const s = document.createElement('script');
     s.async = true;

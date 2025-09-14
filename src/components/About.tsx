@@ -50,7 +50,7 @@ const About: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="bg-red-600/90 backdrop-blur-md border border-red-600/50 p-4 rounded-lg inline-block mb-4 shadow-xl">
+              <div className="bg-brand/90 backdrop-blur-md border border-brand/50 p-4 rounded-lg inline-block mb-4 shadow-xl">
                 <stat.icon className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-3xl md:text-4xl font-black text-white mb-2">{stat.number}</h3>
@@ -72,13 +72,13 @@ const About: React.FC = () => {
               {t('about.trust.p2')}
             </p>
             <div className="flex flex-wrap gap-4">
-              <span className="bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg">
+              <span className="bg-brand/90 backdrop-blur-md border border-brand/50 text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg">
                 {t('about.chips.quality')}
               </span>
-              <span className="bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg">
+              <span className="bg-brand/90 backdrop-blur-md border border-brand/50 text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg">
                 {t('about.chips.prices')}
               </span>
-              <span className="bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg">
+              <span className="bg-brand/90 backdrop-blur-md border border-brand/50 text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg">
                 {t('about.chips.service')}
               </span>
             </div>
@@ -95,7 +95,7 @@ const About: React.FC = () => {
               {/* Navigation Buttons */}
               <button
                 onClick={prevImage}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white p-3 rounded-full hover:bg-red-700 transition-colors shadow-lg"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-brand/90 backdrop-blur-md border border-brand/50 text-white p-3 rounded-full hover:bg-brand-hover transition-colors shadow-lg"
                 aria-label={t('about.gallery.prev')}
                 title={t('about.gallery.prev')}
               >
@@ -103,7 +103,7 @@ const About: React.FC = () => {
               </button>
               <button
                 onClick={nextImage}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white p-3 rounded-full hover:bg-red-700 transition-colors shadow-lg"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-brand/90 backdrop-blur-md border border-brand/50 text-white p-3 rounded-full hover:bg-brand-hover transition-colors shadow-lg"
                 aria-label={t('about.gallery.next')}
                 title={t('about.gallery.next')}
               >
@@ -118,7 +118,7 @@ const About: React.FC = () => {
                     onClick={() => setCurrentImageIndex(index)}
                     className={`w-3 h-3 rounded-full transition-colors border ${
                       index === currentImageIndex
-                        ? 'bg-red-600/90 backdrop-blur-sm border-red-600'
+                        ? 'bg-brand/90 backdrop-blur-sm border-brand'
                         : 'bg-white/50 backdrop-blur-sm border-white/30'
                     }`}
                     aria-label={`${t('about.gallery.seeImage')} ${index + 1}`}
@@ -142,7 +142,7 @@ const About: React.FC = () => {
                 <button
                   key={s.id}
                   onClick={() => alert(`${t('about.services.moreInfo')} ${serviceTitle}`)}
-                  className="bg-red-600/90 backdrop-blur-md border border-red-600/50 p-6 rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105 shadow-2xl text-left"
+                  className="bg-brand/90 backdrop-blur-md border border-brand/50 p-6 rounded-lg hover:bg-brand-hover transition-all duration-300 transform hover:scale-105 shadow-2xl text-left"
                 >
                   <div className="text-3xl mb-4" aria-hidden="true">{s.icon}</div>
                   <h4 className="text-xl font-black text-white mb-3">{serviceTitle}</h4>

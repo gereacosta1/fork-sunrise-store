@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-black border-top border-t border-red-600">
+    <footer className="bg-black border-top border-t border-brand-600">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Logo and Description */}
@@ -61,16 +61,16 @@ const Footer: React.FC = () => {
               aria-label="Go to top"
               title="Top"
             >
-              <div className="bg-red-600 p-2 rounded-lg">
+              <div className="bg-brand-600 p-2 rounded-lg">
                 <img
                   src="/IMG/One_Way_Motors_Logo-1.png"
-                  alt="Logo de One Way Motors"
+                  alt="Logo de SUNRISE STORE"
                   className="w-10 h-10 object-contain rounded-lg"
                 />
               </div>
               <div>
-                <h3 className="text-2xl font-black text-white tracking-wide">ONE WAY MOTORS</h3>
-                <p className="text-lg text-red-400 font-bold">{t('footer.tagline')}</p>
+                <h3 className="text-2xl font-black text-white tracking-wide">SUNRISE STORE</h3>
+                <p className="text-lg text-brand-400 font-bold">{t('footer.tagline')}</p>
               </div>
             </button>
 
@@ -83,7 +83,7 @@ const Footer: React.FC = () => {
                 <button
                   key={s.id}
                   onClick={() => handleSocialClick(s.href)}
-                  className="bg-red-600/90 backdrop-blur-md border border-red-600/50 p-3 rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-110 shadow-lg"
+                  className="bg-brand-600/90 backdrop-blur-md border border-brand-600/50 p-3 rounded-lg hover:bg-brand-700 transition-all duration-300 transform hover:scale-110 shadow-lg"
                   aria-label={t(s.labelKey)}
                   title={t(s.labelKey)}
                 >
@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
                 <li key={link.id}>
                   <button
                     onClick={() => handleLinkClick(link.href)}
-                    className="text-white text-lg font-bold hover:text-red-400 transition-colors"
+                    className="text-white text-lg font-bold hover:text-brand-400 transition-colors"
                   >
                     {t(link.textKey)}
                   </button>
@@ -118,7 +118,7 @@ const Footer: React.FC = () => {
                 <li key={s.id}>
                   <button
                     onClick={() => handleLinkClick(s.href)}
-                    className="text-white text-lg font-bold hover:text-red-400 transition-colors"
+                    className="text-white text-lg font-bold hover:text-brand-400 transition-colors"
                   >
                     {t(s.textKey)}
                   </button>
@@ -128,26 +128,26 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-red-600 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-brand-600 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white text-lg font-bold">
-            © {new Date().getFullYear()} ONE WAY MOTORS. {t('footer.rights')}
+            © {new Date().getFullYear()} SUNRISE STORE. {t('footer.rights')}
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <button
               onClick={handleTermsClick}
-              className="text-white hover:text-red-400 text-lg font-bold transition-colors"
+              className="text-white hover:text-brand-400 text-lg font-bold transition-colors"
             >
               {t('footer.legal.terms')}
             </button>
             <button
               onClick={handlePrivacyClick}
-              className="text-white hover:text-red-400 text-lg font-bold transition-colors"
+              className="text-white hover:text-brand-400 text-lg font-bold transition-colors"
             >
               {t('footer.legal.privacy')}
             </button>
             <button
               onClick={handleCookiesClick}
-              className="text-white hover:text-red-400 text-lg font-bold transition-colors"
+              className="text-white hover:text-brand-400 text-lg font-bold transition-colors"
             >
               {t('footer.legal.cookies')}
             </button>

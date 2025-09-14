@@ -23,7 +23,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
     lastName: '',
     email: '',
     phone: '',
-    reason: 'info', // usamos ids estables para el <select>
+    reason: 'info',
     message: '',
     // honeypot (Netlify)
     ['bot-field']: '',
@@ -59,7 +59,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
     try {
       setStatus('sending');
       const payload: Record<string, string> = {
-        'form-name': 'contact', // ← debe coincidir con name del form
+        'form-name': 'contact',
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
@@ -77,7 +77,6 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
 
       if (res.ok) {
         setStatus('sent');
-        // Limpiar form
         setFormData({
           firstName: '',
           lastName: '',
@@ -94,7 +93,6 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
     } catch {
       setStatus('error');
     } finally {
-      // ocultar banner luego de unos segundos
       setTimeout(() => setStatus('idle'), 4000);
     }
   };
@@ -124,7 +122,6 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
     window.open('https://maps.app.goo.gl/TVEdNoY3SyXYKEyU8', '_blank');
   };
 
-  // Información de contacto – usamos ids estables y claves i18n
   const contactInfo = [
     { id: 'address', icon: MapPin, titleKey: 'contact.info.address', content: '297 Northwest 54th Street, Miami, FL 33127' },
     { id: 'phone',   icon: Phone,  titleKey: 'contact.info.phone',   content: '+1(786)2530995' },
@@ -133,7 +130,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
       id: 'hours',
       icon: Clock,
       titleKey: 'contact.info.hours',
-      content: t('contact.info.hoursValue'), // multiline según idioma
+      content: t('contact.info.hoursValue'),
     },
   ] as const;
 
@@ -163,12 +160,12 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                     else if (info.id === 'email') onEmail();
                     else if (info.id === 'address') handleGoogleMaps();
                   }}
-                  className="flex items-start space-x-4 w-full text-left hover:bg-red-600/10 p-3 rounded-lg transition-colors duration-300"
+                  className="flex items-start space-x-4 w-full text-left hover:bg-brand-600/10 p-3 rounded-lg transition-colors duration-300"
                   disabled={info.id === 'hours'}
                   aria-label={t(info.titleKey)}
                   title={t(info.titleKey)}
                 >
-                  <div className="bg-red-600 p-3 rounded-lg">
+                  <div className="bg-brand-600 p-3 rounded-lg">
                     <info.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -180,7 +177,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
             </div>
 
             {/* Map Placeholder */}
-            <div className="bg-red-600/90 backdrop-blur-md border border-red-600/50 rounded-lg p-8 text-center shadow-2xl">
+            <div className="bg-brand-600/90 backdrop-blur-md border border-brand-600/50 rounded-lg p-8 text-center shadow-2xl">
               <MapPin className="w-12 h-12 text-white mx-auto mb-4" />
               <h4 className="text-xl font-black text-white mb-2">{t('contact.map.title')}</h4>
               <p className="text-white text-lg font-bold mb-4">
@@ -214,7 +211,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
           <div>
             <h3 className="text-3xl font-black text-white mb-8">{t('contact.form.title')}</h3>
 
-            {/* Banner de estado (éxito/error) */}
+            {/* Banner de estado */}
             {status === 'sent' && (
               <div className="mb-4 rounded-lg border border-green-500 bg-green-600/20 text-green-200 px-4 py-3 font-semibold">
                 {t('contact.form.success')}
@@ -235,7 +232,6 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
               className="space-y-6"
               aria-label={t('contact.form.title')}
             >
-              {/* Campos obligatorios para Netlify Forms */}
               <input type="hidden" name="form-name" value="contact" />
               <p className="hidden">
                 <label>
@@ -251,8 +247,8 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className={`w-full bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold placeholder-white/70 focus:outline-none focus:ring-2 ${
-                      errors.firstName ? 'focus:ring-red-300' : 'focus:ring-white'
+                    className={`w-full bg-brand-600/90 backdrop-blur-md border border-brand-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold placeholder-white/70 focus:outline-none focus:ring-2 ${
+                      errors.firstName ? 'focus:ring-brand-300' : 'focus:ring-white'
                     }`}
                     placeholder={t('contact.form.firstName.placeholder')}
                     maxLength={18}
@@ -260,7 +256,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                     aria-invalid={!!errors.firstName}
                     aria-describedby={errors.firstName ? 'err-firstName' : undefined}
                   />
-                  {errors.firstName && <p id="err-firstName" className="text-red-300 text-sm mt-1">{errors.firstName}</p>}
+                  {errors.firstName && <p id="err-firstName" className="text-brand-300 text-sm mt-1">{errors.firstName}</p>}
                   <p className="text-white/60 text-sm mt-1">{formData.firstName.length}/18</p>
                 </div>
                 <div>
@@ -270,8 +266,8 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className={`w-full bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold placeholder-white/70 focus:outline-none focus:ring-2 ${
-                      errors.lastName ? 'focus:ring-red-300' : 'focus:ring-white'
+                    className={`w-full bg-brand-600/90 backdrop-blur-md border border-brand-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold placeholder-white/70 focus:outline-none focus:ring-2 ${
+                      errors.lastName ? 'focus:ring-brand-300' : 'focus:ring-white'
                     }`}
                     placeholder={t('contact.form.lastName.placeholder')}
                     maxLength={18}
@@ -279,7 +275,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                     aria-invalid={!!errors.lastName}
                     aria-describedby={errors.lastName ? 'err-lastName' : undefined}
                   />
-                  {errors.lastName && <p id="err-lastName" className="text-red-300 text-sm mt-1">{errors.lastName}</p>}
+                  {errors.lastName && <p id="err-lastName" className="text-brand-300 text-sm mt-1">{errors.lastName}</p>}
                   <p className="text-white/60 text-sm mt-1">{formData.lastName.length}/18</p>
                 </div>
               </div>
@@ -291,8 +287,8 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`w-full bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold placeholder-white/70 focus:outline-none focus:ring-2 ${
-                    errors.email ? 'focus:ring-red-300' : 'focus:ring-white'
+                  className={`w-full bg-brand-600/90 backdrop-blur-md border border-brand-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold placeholder-white/70 focus:outline-none focus:ring-2 ${
+                    errors.email ? 'focus:ring-brand-300' : 'focus:ring-white'
                   }`}
                   placeholder="onewaymotors2@gmail.com"
                   maxLength={50}
@@ -300,7 +296,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? 'err-email' : undefined}
                 />
-                {errors.email && <p id="err-email" className="text-red-300 text-sm mt-1">{errors.email}</p>}
+                {errors.email && <p id="err-email" className="text-brand-300 text-sm mt-1">{errors.email}</p>}
                 <p className="text-white/60 text-sm mt-1">{formData.email.length}/50</p>
               </div>
 
@@ -311,8 +307,8 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className={`w-full bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold placeholder-white/70 focus:outline-none focus:ring-2 ${
-                    errors.phone ? 'focus:ring-red-300' : 'focus:ring-white'
+                  className={`w-full bg-brand-600/90 backdrop-blur-md border border-brand-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold placeholder-white/70 focus:outline-none focus:ring-2 ${
+                    errors.phone ? 'focus:ring-brand-300' : 'focus:ring-white'
                   }`}
                   placeholder="+17862530995"
                   maxLength={15}
@@ -321,7 +317,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                   aria-invalid={!!errors.phone}
                   aria-describedby={errors.phone ? 'err-phone' : undefined}
                 />
-                {errors.phone && <p id="err-phone" className="text-red-300 text-sm mt-1">{errors.phone}</p>}
+                {errors.phone && <p id="err-phone" className="text-brand-300 text-sm mt-1">{errors.phone}</p>}
               </div>
 
               <div>
@@ -330,7 +326,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                   name="reason"
                   value={formData.reason}
                   onChange={handleInputChange}
-                  className="w-full bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold focus:outline-none focus:ring-2 focus:ring-white"
+                  className="w-full bg-brand-600/90 backdrop-blur-md border border-brand-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold focus:outline-none focus:ring-2 focus:ring-white"
                 >
                   <option value="info">{t('contact.form.reason.info')}</option>
                   <option value="finance">{t('contact.form.reason.finance')}</option>
@@ -349,8 +345,8 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
-                  className={`w-full bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold placeholder-white/70 focus:outline-none focus:ring-2 ${
-                    errors.message ? 'focus:ring-red-300' : 'focus:ring-white'
+                  className={`w-full bg-brand-600/90 backdrop-blur-md border border-brand-600/50 text-white rounded-lg px-4 py-3 text-lg font-bold placeholder-white/70 focus:outline-none focus:ring-2 ${
+                    errors.message ? 'focus:ring-brand-300' : 'focus:ring-white'
                   }`}
                   placeholder={t('contact.form.message.placeholder')}
                   maxLength={500}
@@ -358,7 +354,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
                   aria-invalid={!!errors.message}
                   aria-describedby={errors.message ? 'err-message' : undefined}
                 ></textarea>
-                {errors.message && <p id="err-message" className="text-red-300 text-sm mt-1">{errors.message}</p>}
+                {errors.message && <p id="err-message" className="text-brand-300 text-sm mt-1">{errors.message}</p>}
               </div>
 
               <button
@@ -373,7 +369,7 @@ const Contact: React.FC<ContactProps> = ({ onPhoneCall, onWhatsApp, onEmail }) =
               </button>
             </form>
 
-            <div className="mt-8 p-4 bg-red-600/90 backdrop-blur-md border border-red-600/50 rounded-lg shadow-lg">
+            <div className="mt-8 p-4 bg-brand-600/90 backdrop-blur-md border border-brand-600/50 rounded-lg shadow-lg">
               <p className="text-lg text-white font-bold">
                 <strong>{t('contact.form.sla.title')}</strong> {t('contact.form.sla.body')}
               </p>

@@ -39,7 +39,7 @@ function CartFab() {
   return (
     <button
       onClick={open}
-      className="fixed right-4 bottom-4 z-[9999] bg-red-600 text-white rounded-full shadow-2xl px-5 py-3 flex items-center gap-2 hover:bg-red-700"
+      className="fixed right-4 bottom-4 z-[9999] bg-brand-600 text-white rounded-full shadow-2xl px-5 py-3 flex items-center gap-2 hover:bg-brand-700"
       aria-label="Abrir carrito"
     >
       <ShoppingCart className="w-5 h-5" />
@@ -98,9 +98,9 @@ function AppInner() {
 
 export default function App() {
   return (
-     <I18nProvider> 
+    <I18nProvider>
       <CartProvider>
-         <AppInner />
+        <AppInner />
       </CartProvider>
     </I18nProvider>
   );

@@ -41,10 +41,10 @@ const Btn: React.FC<BtnProps> = ({
   const base =
     "w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-extrabold " +
     "transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 " +
-    "focus:ring-red-500 disabled:opacity-60 disabled:cursor-not-allowed";
+    "focus:ring-brand-500 disabled:opacity-60 disabled:cursor-not-allowed";
   const variants = {
     primary:
-      "bg-red-600 text-white hover:bg-red-700 shadow-lg hover:shadow-red-500/40 active:scale-[.98]",
+      "bg-brand-600 text-white hover:bg-brand-700 shadow-lg hover:shadow-brand-500/40 active:scale-[.98]",
     secondary:
       "bg-black text-white border border-white/15 hover:bg-black/90 shadow-lg active:scale-[.98]",
     ghost:
@@ -70,11 +70,7 @@ const FEATURE_KEY_BY_ES: Record<string, string> = {
   // (si luego querés agregar más, solo añádelos acá)
 };
 
-/** ✅ Traducción robusta de features:
- * 1) product.{id}.feature.{idx} (si existe en el diccionario)
- * 2) Mapeo genérico por texto ES (FEATURE_KEY_BY_ES)
- * 3) Fallback al texto original
- */
+/** ✅ Traducción robusta de features */
 const translateFeature = (
   t: (k: string) => string,
   productId: number,
@@ -362,7 +358,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
     },
   ];
 
-  // Mostrar solo eléctricos o productos sin motor (JBL/ruedas)
+    // Mostrar solo eléctricos o productos sin motor (JBL/ruedas)
   const onlyElectricOrNoEngine = motorcycles.filter(m =>
     (m.engine && m.engine.toLowerCase() === 'electric') || !m.engine
   );
@@ -395,7 +391,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
 
         {/* Filter Buttons */}
         <div className="flex justify-center mb-8">
-          <div className="bg-red-600/90 backdrop-blur-md border border-red-600/50 rounded-lg p-2 flex space-x-2 shadow-2xl">
+          <div className="bg-brand-600/90 backdrop-blur-md border border-brand-600/50 rounded-lg p-2 flex space-x-2 shadow-2xl">
             <button
               onClick={() => setFilter('all')}
               className={`px-8 py-3 rounded-md text-lg font-black transition-all duration-300 ${
@@ -429,7 +425,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
             return (
               <div
                 key={moto.id}
-                className="bg-red-600/95 backdrop-blur-md border border-red-600/30 rounded-lg overflow-hidden shadow-2xl hover:shadow-red-500/50 transition-all duration-300 group transform hover:scale-105"
+                className="bg-brand-600/95 backdrop-blur-md border border-brand-600/30 rounded-lg overflow-hidden shadow-2xl hover:shadow-brand-500/50 transition-all duration-300 group transform hover:scale-105"
               >
                 <div className="relative">
                   <img
@@ -439,7 +435,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
                     loading="lazy"
                     onError={(e) => {
                       const target = e.currentTarget as HTMLImageElement;
-                      if (target.src.endsWith('/fallback.png')) return; // evita loop si también falla el fallback
+                      if (target.src.endsWith('/fallback.png')) return;
                       target.src = '/fallback.png';
                     }}
                   />
@@ -464,8 +460,8 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
                     >
                       <Heart
                         className="w-5 h-5"
-                        color={favorites.includes(moto.id) ? '#ef4444' : '#ffffff'}
-                        fill={favorites.includes(moto.id) ? '#ef4444' : 'none'}
+                        color={favorites.includes(moto.id) ? '#ff6b00' : '#ffffff'}
+                        fill={favorites.includes(moto.id) ? '#ff6b00' : 'none'}
                       />
                     </button>
                   </div>
@@ -558,10 +554,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
                         });
                         open();
                       }}
-                      className="bg-red-800 text-white font-black px-6 py-3 rounded-xl text-lg 
-                                 border-2 border-white/80 shadow-lg 
-                                 hover:bg-red-900 hover:border-white hover:scale-105 
-                                 transition-all duration-300"
+                      className="border-2 border-white/80"
                     >
                       {t('cart.add')}
                     </Btn>
@@ -606,7 +599,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
         <div className="text-center mt-12">
           <button
             onClick={() => showToast(t('catalog.toast.moreSoon'))}
-            className="bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white px-12 py-4 rounded-lg text-xl font-black hover:bg-red-700 transition-all duration-300 transform hover:scale-105 shadow-2xl">
+            className="bg-brand-600/90 backdrop-blur-md border border-brand-600/50 text-white px-12 py-4 rounded-lg text-xl font-black hover:bg-brand-700 transition-all duration-300 transform hover:scale-105 shadow-2xl">
             {t('catalog.cta.moreBikes')}
           </button>
         </div>

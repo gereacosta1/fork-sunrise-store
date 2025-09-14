@@ -26,7 +26,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 tracking-tight">
             {t('hero.title.pre')}{' '}
-            <span className="text-red-500">{t('hero.title.highlight')}</span>
+            <span className="text-brand">{t('hero.title.highlight')}</span>
             <br />
             {t('hero.title.post')}
           </h1>
@@ -39,7 +39,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
             <button 
               onClick={() => onNavigate('catalogo')}
-              className="bg-red-600/90 backdrop-blur-md border border-red-600/50 text-white px-12 py-4 rounded-lg text-xl font-black hover:bg-red-700 transition-all duration-300 flex items-center justify-center space-x-3 group transform hover:scale-105 shadow-2xl"
+              className="bg-brand backdrop-blur-md border border-brand/50 text-white px-12 py-4 rounded-lg text-xl font-black hover:bg-brand-hover transition-all duration-300 flex items-center justify-center space-x-3 group transform hover:scale-105 shadow-2xl"
             >
               <span>{t('hero.cta.explore')}</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -47,7 +47,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
             <button 
               onClick={() => onNavigate('contacto')}
-              className="border-2 border-red-600/80 bg-black/30 backdrop-blur-md text-red-500 px-12 py-4 rounded-lg text-xl font-black hover:bg-red-600 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-2xl"
+              className="border-2 border-brand/80 bg-black/30 backdrop-blur-md text-brand px-12 py-4 rounded-lg text-xl font-black hover:bg-brand-hover hover:text-white transition-all duration-300 transform hover:scale-105 shadow-2xl"
             >
               {t('hero.cta.finance')}
             </button>
@@ -56,15 +56,15 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           {/* Features */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="flex items-center justify-center space-x-3 text-white">
-              <Star className="w-8 h-8 text-red-500" />
+              <Star className="w-8 h-8 text-brand" />
               <span className="text-xl md:text-2xl font-bold">{t('hero.feature.quality')}</span>
             </div>
             <div className="flex items-center justify-center space-x-3 text-white">
-              <Shield className="w-8 h-8 text-red-500" />
+              <Shield className="w-8 h-8 text-brand" />
               <span className="text-xl md:text-2xl font-bold">{t('hero.feature.warranty')}</span>
             </div>
             <div className="flex items-center justify-center space-x-3 text-white">
-              <Wrench className="w-8 h-8 text-red-500" />
+              <Wrench className="w-8 h-8 text-brand" />
               <span className="text-xl md:text-2xl font-bold">{t('hero.feature.service')}</span>
             </div>
           </div>

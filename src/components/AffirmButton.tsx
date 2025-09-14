@@ -57,7 +57,7 @@ function Toast({
     type === 'success'
       ? 'bg-green-600/95 text-white border-green-400'
       : type === 'error'
-      ? 'bg-red-600/95 text-white border-red-400'
+      ? 'bg-brand-600/95 text-white border-brand-400'
       : 'bg-black/90 text-white border-white/20';
   return (
     <div className={`${base} ${palette}`} role="status" onClick={onClose}>

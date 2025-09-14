@@ -349,7 +349,7 @@ export default function AffirmButton({
           city: c.address.city,
           state: c.address.state,
           zipcode: c.address.zip,
-          country: c.address.country || 'USA',
+          country: (c.address.country || 'US' ) as 'US',
         },
       },
       shipping: {
@@ -360,7 +360,7 @@ export default function AffirmButton({
           city: c.address.city,
           state: c.address.state,
           zipcode: c.address.zip,
-          country: c.address.country || 'USA',
+          country: (c.address.country || 'US' ) as 'US',
         },
       },
       customer: { email: c.email, phone_number: c.phone },

@@ -67,14 +67,14 @@ const MotorcycleModal: React.FC<MotorcycleModalProps> = ({ motorcycle, onClose, 
       role="dialog"
       aria-modal="true"
     >
-      <div className="bg-black/95 backdrop-blur-md border border-red-600/30 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div className="bg-black/95 backdrop-blur-md border border-brand/30 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
         <div className="relative">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-red-600/30">
+          <div className="flex items-center justify-between p-6 border-b border-brand/30">
             <h2 className="text-3xl font-black text-white">{motorcycle.name}</h2>
             <button
               onClick={onClose}
-              className="p-2 rounded-full bg-red-600/20 hover:bg-red-600/40 transition-colors"
+              className="p-2 rounded-full bg-brand/20 hover:bg-brand/40 transition-colors"
               aria-label={t('modal.close')}
               title={t('modal.close')}
             >
@@ -166,7 +166,7 @@ const MotorcycleModal: React.FC<MotorcycleModalProps> = ({ motorcycle, onClose, 
                 )}
 
                 {/* Price & Actions */}
-                <div className="bg-red-600/90 backdrop-blur-sm p-6 rounded-lg border border-red-600/50">
+                <div className="bg-brand/90 backdrop-blur-sm p-6 rounded-lg border border-brand/50">
                   {Number(motorcycle.price) > 0 && (
                     <p className="text-4xl font-black text-white mb-4">
                       {fmtMoney(Number(motorcycle.price))}

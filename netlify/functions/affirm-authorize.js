@@ -55,8 +55,9 @@ export async function handler(event) {
       return resp(500, { error: "Missing AFFIRM keys" });
     }
 
-    // *** AUTH correcto: PRIVATE como usuario, password vacío ***
-    const AUTH = "Basic " + Buffer.from(`${PRIV}:`).toString("base64");
+// Auth correcto: usuario = PUBLIC, password = PRIVATE
+const AUTH = "Basic " + Buffer.from(`${PUB}:${PRIV}`).toString("base64");
+
 
     // 1) Autorizar: crear el charge a partir del checkout_token
     const authRes = await fetch(`${BASE}/charges`, {

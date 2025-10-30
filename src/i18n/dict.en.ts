@@ -17,7 +17,7 @@ const en = {
   "hero.feature.warranty": "Extended Warranty",
   "hero.feature.service": "Technical Service",
 
-  // FAVORITES (faltaban)
+  // FAVORITES
   "favorites.add": "Add to favorites",
   "favorites.remove": "Remove from favorites",
 
@@ -49,6 +49,7 @@ const en = {
   "modal.financing": "Financing",
   "modal.whatsapp": "WhatsApp us",
 
+  // GUARANTEE
   "guarantee.warranty": "Warranty",
   "guarantee.service": "Service",
   "guarantee.quality": "Quality",
@@ -125,46 +126,47 @@ const en = {
 
   // ABOUT
   "about.title": "About Us",
-"about.subtitle": "With over 15 years of experience, we are the most trusted electric-vehicle store in the region. We offer quality, service, and competitive prices.",
+  "about.subtitle": "With over 15 years of experience, we are the most trusted electric-vehicle store in the region. We offer quality, service, and competitive prices.",
 
-"about.stats.years": "Years of Experience",
-"about.stats.clients": "Satisfied Customers",
-"about.stats.support": "Technical Support",
-"about.stats.quality": "Quality Guarantee",
+  "about.stats.years": "Years of Experience",
+  "about.stats.clients": "Satisfied Customers",
+  "about.stats.support": "Technical Support",
+  "about.stats.quality": "Quality Guarantee",
 
-"about.trust.title": "Your Trust is Our Priority",
-"about.trust.p1": "At SUNRISE STORE, we know buying an electric vehicle is a big decision. That’s why we deliver the best experience, from selection to after-sales service.",
-"about.trust.p2": "Our expert team will help you find the perfect option for your needs and budget. We offer flexible financing and extended warranties for peace of mind.",
+  "about.trust.title": "Your Trust is Our Priority",
+  "about.trust.p1": "At SUNRISE STORE, we know buying an electric vehicle is a big decision. That’s why we deliver the best experience, from selection to after-sales service.",
+  "about.trust.p2": "Our expert team will help you find the perfect option for your needs and budget. We offer flexible financing and extended warranties for peace of mind.",
 
-"about.chips.quality": "Guaranteed Quality",
-"about.chips.prices": "Competitive Prices",
-"about.chips.service": "Professional Service",
+  "about.chips.quality": "Guaranteed Quality",
+  "about.chips.prices": "Competitive Prices",
+  "about.chips.service": "Professional Service",
 
-"about.gallery.alt": "Our store",
-"about.gallery.prev": "Previous image",
-"about.gallery.next": "Next image",
-"about.gallery.seeImage": "See image {{n}}",
+  "about.gallery.alt": "Our store",
+  "about.gallery.prev": "Previous image",
+  "about.gallery.next": "Next image",
+  "about.gallery.seeImage": "See image {{n}}",
 
-"about.services.title": "Our Services",
-"about.services.new.title": "New Vehicles",
-"about.services.new.desc": "Wide selection from top brands with full warranty.",
-"about.services.used.title": "Certified Used Vehicles",
-"about.services.used.desc": "Inspected and certified with extended warranty.",
-"about.services.fin.title": "Flexible Financing",
-"about.services.fin.desc": "Financing options tailored to your budget and needs.",
-"about.services.tech.title": "Technical Service",
-"about.services.tech.desc": "Specialized workshop with certified technicians and original parts.",
-"about.services.moreInfo": "More information about:",
+  "about.services.title": "Our Services",
+  "about.services.new.title": "New Vehicles",
+  "about.services.new.desc": "Wide selection from top brands with full warranty.",
+  "about.services.used.title": "Certified Used Vehicles",
+  "about.services.used.desc": "Inspected and certified with extended warranty.",
+  "about.services.fin.title": "Flexible Financing",
+  "about.services.fin.desc": "Financing options tailored to your budget and needs.",
+  "about.services.tech.title": "Technical Service",
+  "about.services.tech.desc": "Specialized workshop with certified technicians and original parts.",
+  "about.services.moreInfo": "More information about:",
 
- title: 'Your cart',
-    clear: 'Clear cart',
-    total: 'Total',
-    pay: 'Pay with Affirm',
-    qty: 'Qty',
-    empty: 'Your cart is empty',
-      item: { one: 'item', other: 'items' },
-
-
+  // CART
+  cart: {
+    title: "Your cart",
+    clear: "Clear cart",
+    total: "Total",
+    pay: "Pay with Affirm",
+    qty: "Qty",
+    empty: "Your cart is empty",
+    item: { one: "item", other: "items" },
+  },
 
   // GENERIC FEATURES (para mapear desde el array)
   "feature.motor": "Electric motor",
@@ -176,8 +178,7 @@ const en = {
   "feature.gps": "GPS navigation system",
 
   // MISC
-  "common.loading": "Loading..."
-
+  "common.loading": "Loading...",
 } as const;
 
 export default en;

@@ -156,6 +156,16 @@ const en = {
 "about.services.tech.desc": "Specialized workshop with certified technicians and original parts.",
 "about.services.moreInfo": "More information about:",
 
+ title: 'Your cart',
+    clear: 'Clear cart',
+    total: 'Total',
+    pay: 'Pay with Affirm',
+    qty: 'Qty',
+    empty: 'Your cart is empty',
+      item: { one: 'item', other: 'items' },
+
+
+
   // GENERIC FEATURES (para mapear desde el array)
   "feature.motor": "Electric motor",
   "feature.lightAgile": "Light & agile",

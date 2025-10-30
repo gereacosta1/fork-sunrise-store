@@ -149,6 +149,15 @@ const es = {
 
 
 
+ title: 'Tu carrito',
+    clear: 'Vaciar carrito',
+    total: 'Total',
+    pay: 'Pagar con Affirm',
+    qty: 'Cant.',
+    empty: 'Tu carrito está vacío',
+    item: { one: 'artículo', other: 'artículos' },
+
+
     // ABOUT
   "about.title": "Sobre Nosotros",
   "about.subtitle": "Con más de 15 años de experiencia en el mercado, somos la tienda de motocicletas más confiable de la región. Ofrecemos calidad, servicio y precios competitivos.",

@@ -1,9 +1,11 @@
-// src/components/CartDrawer.tsx
+// src/components/CartDrawer.tsx fork-sunrise-store
 import React from 'react';
 import { X, Trash2, Plus, Minus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import AffirmButton from './AffirmButton';
 import { useI18n } from '../i18n/I18nProvider';
+import PayWithCard from "./PayWithCard";
+
 
 const CartDrawer: React.FC = () => {
   const { t, fmtMoney } = useI18n();
@@ -110,7 +112,7 @@ const CartDrawer: React.FC = () => {
             <span className="text-xl font-black">{fmtMoney(Number(totalUSD) || 0)}</span>
           </div>
 
-          <div className="flex gap-2">
+                   <div className="flex gap-2">
             <button
               onClick={clear}
               disabled={items.length === 0}
@@ -119,8 +121,8 @@ const CartDrawer: React.FC = () => {
               {t('cart.clear')}
             </button>
 
-            {/* Affirm para TODO el carrito */}
-            <div className="flex-1">
+            <div className="flex-1 space-y-2">
+              {/* Affirm para TODO el carrito */}
               {items.length > 0 && (Number(totalUSD) || 0) > 0 ? (
                 <AffirmButton
                   cartItems={items.map(it => ({
@@ -141,8 +143,12 @@ const CartDrawer: React.FC = () => {
                   {t('cart.payWithAffirm')}
                 </button>
               )}
+
+              {/* Botón de pago con tarjeta (Stripe) */}
+              <PayWithCard />
             </div>
           </div>
+it 
         </div>
       </aside>
     </div>

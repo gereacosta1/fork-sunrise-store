@@ -9,6 +9,12 @@
   status = 200
 
 [[redirects]]
+  from = "/api/card-checkout"
+  to = "/.netlify/functions/card-checkout"
+  status = 200
+
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

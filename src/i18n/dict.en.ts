@@ -159,9 +159,9 @@ const en = {
 
   // CART
   cart: {
-    title: "Your cart",
-    clear: "Clear cart",
-    total: "Total",
+    "cart.title": "Shopping Cart",
+  "cart.clear": "Clear cart",
+  "cart.total": "Total:",
     pay: "Pay with Affirm",
     qty: "Qty",
     empty: "Your cart is empty",

@@ -4,8 +4,7 @@ import { X, Trash2, Plus, Minus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import AffirmButton from './AffirmButton';
 import { useI18n } from '../i18n/I18nProvider';
-import PayWithCard from "./PayWithCard";
-
+import PayWithCard from './PayWithCard';
 
 const CartDrawer: React.FC = () => {
   const { t, fmtMoney } = useI18n();
@@ -112,7 +111,7 @@ const CartDrawer: React.FC = () => {
             <span className="text-xl font-black">{fmtMoney(Number(totalUSD) || 0)}</span>
           </div>
 
-                   <div className="flex gap-2">
+          <div className="flex gap-2">
             <button
               onClick={clear}
               disabled={items.length === 0}
@@ -148,7 +147,6 @@ const CartDrawer: React.FC = () => {
               <PayWithCard />
             </div>
           </div>
-it 
         </div>
       </aside>
     </div>

@@ -2,3 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+  color: #fff;
+}
+
+::selection {
+  background: #9b7a55;
+  color: #fff;
+}
+
+input,
+textarea,
+select {
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Brand helpers */
+.text-brand {
+  color: #d8b98c;
+}
+
+.bg-brand {
+  background-color: #9b7a55;
+}
+
+.bg-brand-hover {
+  background-color: #7c6043;
+}

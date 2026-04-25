@@ -9,8 +9,9 @@ export default function UnderlineGrow({ children }: Props) {
       className="
         relative inline-block
         after:content-[''] after:absolute after:left-0 after:-bottom-1
-        after:h-[6px] after:w-0 after:bg-[rgb(199,48,48)]
-        after:transition-[width] after:duration-300 after:ease-in
+        after:h-[5px] after:w-0 after:bg-[#d8b98c]
+        after:rounded-full
+        after:transition-[width] after:duration-300 after:ease-in-out
         hover:after:w-full
       "
     >

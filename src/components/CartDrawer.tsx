@@ -1,4 +1,4 @@
-// src/components/CartDrawer.tsx fork-sunrise-store
+// src/components/CartDrawer.tsx
 import React from 'react';
 import { X, Trash2, Plus, Minus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -10,143 +10,170 @@ const CartDrawer: React.FC = () => {
   const { t, fmtMoney } = useI18n();
   const { items, isOpen, close, removeItem, setQty, totalUSD, clear } = useCart();
 
-  const handleDec = (id: string, qty: number) => setQty(id, Math.max(1, qty - 1));
-  const handleInc = (id: string, qty: number) => setQty(id, qty + 1);
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '/';
 
-  // url actual solo si estamos en el browser (evita warnings en SSR/build)
-  const currentUrl =
-    typeof window !== 'undefined' ? window.location.href : '/';
+  const handleDec = (id: string, qty: number) => {
+    setQty(id, Math.max(1, qty - 1));
+  };
+
+  const handleInc = (id: string, qty: number) => {
+    setQty(id, qty + 1);
+  };
+
+  // 🔥 fallback por si faltan traducciones
+  const safeT = (key: string, fallback: string) => {
+    const val = t(key);
+    return val === key ? fallback : val;
+  };
 
   return (
     <div
       className={`fixed inset-0 z-[10000] ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
-      aria-hidden={!isOpen}
     >
-      {/* backdrop */}
+      {/* BACKDROP */}
       <div
-        className={`absolute inset-0 bg-black/50 transition-opacity ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${
+          isOpen ? 'opacity-100' : 'opacity-0'
+        }`}
         onClick={close}
       />
 
-      {/* panel */}
+      {/* DRAWER */}
       <aside
-        className={`absolute right-0 top-0 h-full w-full max-w-md bg-black text-white border-l border-white/10 shadow-2xl transform transition-transform
-        ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
-        role="dialog"
-        aria-label={t('cart.title')}
+        className={`absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-[#070604] text-white border-l border-[#9b7a55]/40 shadow-2xl transition-transform duration-300 ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-white/10">
-          <h3 className="text-xl font-black">{t('cart.title')}</h3>
-          <button onClick={close} className="p-2 rounded hover:bg-white/10" aria-label={t('modal.close')}>
-            <X className="w-5 h-5" />
+        {/* HEADER */}
+        <div className="flex items-center justify-between border-b border-[#9b7a55]/25 p-5">
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-[#d8b98c]">
+              GUZZIES RIV
+            </p>
+            <h3 className="text-2xl font-black">
+              {safeT('cart.title', 'Your Cart')}
+            </h3>
+          </div>
+
+          <button
+            onClick={close}
+            className="rounded-full border border-white/10 bg-white/5 p-2 hover:bg-white/10 transition"
+          >
+            <X className="h-5 w-5" />
           </button>
         </div>
 
-        <div className="p-4 space-y-4 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 220px)' }}>
+        {/* CONTENT */}
+        <div className="flex-1 overflow-y-auto p-5">
           {items.length === 0 ? (
-            <p className="text-white/70">{t('cart.empty')}</p>
+            <div className="flex h-full min-h-[320px] flex-col items-center justify-center text-center">
+              <p className="text-lg font-bold text-white">
+                {safeT('cart.empty', 'Your cart is empty')}
+              </p>
+              <p className="mt-2 text-sm text-white/50">
+                {safeT('cart.emptyDesc', 'Add products to continue')}
+              </p>
+            </div>
           ) : (
-            items.map(it => (
-              <div key={it.id} className="flex gap-3 border border-white/10 rounded-lg p-3">
-                <img
-                  src={it.image || '/fallback.png'}
-                  alt={it.name}
-                  className="w-20 h-20 object-cover rounded"
-                  onError={(e) => {
-                    const timg = e.currentTarget as HTMLImageElement;
-                    if (!timg.src.endsWith('/fallback.png')) timg.src = '/fallback.png';
-                  }}
-                />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <p className="font-bold truncate">{it.name}</p>
-                      <p className="text-sm text-white/70">{fmtMoney(Number(it.price))}</p>
+            <div className="space-y-4">
+              {items.map((it) => {
+                const price = Number(it.price) || 0;
+                const qty = Number(it.qty) || 1;
+
+                return (
+                  <div
+                    key={it.id}
+                    className="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3"
+                  >
+                    <img
+                      src={it.image || '/IMG/guzzies-riv-logo-furniture.jpeg'}
+                      alt={it.name}
+                      className="h-24 w-24 rounded-xl bg-white object-contain p-2"
+                    />
+
+                    <div className="flex-1">
+                      <div className="flex justify-between">
+                        <div>
+                          <p className="font-bold">{it.name}</p>
+                          <p className="text-[#d8b98c] font-semibold">
+                            {fmtMoney(price)}
+                          </p>
+                        </div>
+
+                        <button onClick={() => removeItem(it.id)}>
+                          <Trash2 className="w-4 h-4 text-white/60 hover:text-white" />
+                        </button>
+                      </div>
+
+                      {/* QTY */}
+                      <div className="mt-3 flex items-center gap-2">
+                        <button
+                          onClick={() => handleDec(it.id, qty)}
+                          className="bg-white/10 p-2 rounded-lg"
+                        >
+                          <Minus className="w-4 h-4" />
+                        </button>
+
+                        <span className="px-3 py-1 bg-white/10 rounded-lg font-bold">
+                          {qty}
+                        </span>
+
+                        <button
+                          onClick={() => handleInc(it.id, qty)}
+                          className="bg-white/10 p-2 rounded-lg"
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
+
+                        <span className="ml-auto font-black">
+                          {fmtMoney(price * qty)}
+                        </span>
+                      </div>
                     </div>
-                    <button
-                      onClick={() => removeItem(it.id)}
-                      className="p-2 rounded hover:bg-white/10"
-                      title={t('cart.remove')}
-                      aria-label={t('cart.remove')}
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
                   </div>
-
-                  <div className="mt-2 flex items-center gap-2">
-                    <button
-                      onClick={() => handleDec(it.id, it.qty)}
-                      className="p-2 rounded bg-white/10 hover:bg-white/20"
-                      aria-label={t('cart.minus')}
-                      title={t('cart.minus')}
-                    >
-                      <Minus className="w-4 h-4" />
-                    </button>
-
-                    <span className="px-3 py-1 rounded bg-white/10 font-bold">{it.qty}</span>
-
-                    <button
-                      onClick={() => handleInc(it.id, it.qty)}
-                      className="p-2 rounded bg-white/10 hover:bg-white/20"
-                      aria-label={t('cart.plus')}
-                      title={t('cart.plus')}
-                    >
-                      <Plus className="w-4 h-4" />
-                    </button>
-
-                    <span className="ml-auto font-bold">
-                      {fmtMoney(Number(it.price) * Number(it.qty))}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))
+                );
+              })}
+            </div>
           )}
         </div>
 
-        {/* footer */}
-        <div className="p-4 border-t border-white/10 space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-white/80">{t('cart.total')}</span>
-            <span className="text-xl font-black">{fmtMoney(Number(totalUSD) || 0)}</span>
+        {/* FOOTER */}
+        <div className="border-t border-[#9b7a55]/25 bg-[#0d0a07] p-5 space-y-4">
+          <div className="flex justify-between">
+            <span className="text-white/60">
+              {safeT('cart.total', 'Total')}
+            </span>
+            <span className="text-2xl font-black text-[#d8b98c]">
+              {fmtMoney(Number(totalUSD) || 0)}
+            </span>
           </div>
 
-          <div className="flex gap-2">
-            <button
-              onClick={clear}
-              disabled={items.length === 0}
-              className="flex-1 bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-lg font-bold disabled:opacity-50"
-            >
-              {t('cart.clear')}
-            </button>
+          {/* CLEAR */}
+          <button
+            onClick={clear}
+            disabled={!items.length}
+            className="w-full bg-white/5 py-3 rounded-xl font-bold hover:bg-white/10 disabled:opacity-40"
+          >
+            {safeT('cart.clear', 'Clear cart')}
+          </button>
 
-            <div className="flex-1 space-y-2">
-              {/* Affirm para TODO el carrito */}
-              {items.length > 0 && (Number(totalUSD) || 0) > 0 ? (
-                <AffirmButton
-                  cartItems={items.map(it => ({
-                    name: it.name,
-                    price: Number(it.price),
-                    qty: Number(it.qty),
-                    sku: String(it.sku || it.id),
-                    url: String(it.url || currentUrl),
-                    image: it.image,
-                  }))}
-                  totalUSD={Number(totalUSD)}
-                />
-              ) : (
-                <button
-                  disabled
-                  className="w-full bg-white/10 text-white px-4 py-3 rounded-lg font-bold opacity-50 cursor-not-allowed"
-                >
-                  {t('cart.payWithAffirm')}
-                </button>
-              )}
+          {/* AFFIRM */}
+          {items.length > 0 && totalUSD >= 50 && (
+            <AffirmButton
+              cartItems={items.map((it) => ({
+                name: it.name,
+                price: Number(it.price),
+                qty: Number(it.qty),
+                sku: String(it.sku || it.id),
+                url: currentUrl,
+                image: it.image,
+              }))}
+              totalUSD={Number(totalUSD)}
+            />
+          )}
 
-              {/* Botón de pago con tarjeta (Stripe) */}
-              <PayWithCard />
-            </div>
-          </div>
+          {/* CARD */}
+          <PayWithCard />
         </div>
       </aside>
     </div>

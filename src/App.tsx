@@ -13,7 +13,7 @@ import { CartProvider, useCart } from './context/CartContext';
 import CartDrawer from './components/CartDrawer';
 import { ShoppingCart } from 'lucide-react';
 
-export interface Motorcycle {
+export interface FurnitureProduct {
   id: number;
   name: string;
   brand: string;
@@ -21,15 +21,18 @@ export interface Motorcycle {
   year: number;
   price: number;
   image: string;
-  condition: 'Nueva' | 'Usada';
-  engine: string;
-  mileage?: number;
+  condition: 'Nuevo' | 'Usado';
+  material: string;
   featured?: boolean;
   description?: string;
   features?: string[];
 }
 
-// Botón flotante para abrir el carrito (usa open() y cuenta total de qty)
+// Compatibilidad temporal con componentes existentes.
+// Después podemos renombrar MotorcycleModal y demás, pero así no rompemos nada ahora.
+export type Motorcycle = FurnitureProduct;
+
+// Botón flotante para abrir el carrito
 function CartFab() {
   const { open, items } = useCart();
   const count = items.reduce((sum, it) => sum + it.qty, 0);
@@ -58,16 +61,16 @@ function AppInner() {
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handlePhoneCall = () => window.open('tel:+1 (786) 253-0995', '_self');
+  const handlePhoneCall = () => window.open('tel:+17862993771', '_self');
 
   const handleWhatsApp = () => {
-    const message = encodeURIComponent('¡Hola! Me interesa información sobre sus motocicletas. ¿Podrían ayudarme?');
-    const whatsappUrl = `https://wa.me/+17862530995?text=${message}`;
+    const message = encodeURIComponent('Hola, me interesa información sobre sus muebles. ¿Podrían ayudarme?');
+    const whatsappUrl = `https://wa.me/17862993771?text=${message}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleEmail = () => {
-    window.open('mailto:onewaymotors2@gmail.com.mx?subject=Consulta sobre motocicletas', '_self');
+    window.open('mailto:guzziesriv@gmail.com?subject=Consulta sobre muebles', '_self');
   };
 
   return (
@@ -89,7 +92,6 @@ function AppInner() {
         />
       )}
 
-      {/* Botón flotante + Drawer del carrito */}
       <CartFab />
       <CartDrawer />
     </div>

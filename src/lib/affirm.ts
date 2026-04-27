@@ -1,41 +1,37 @@
 // src/lib/affirm.ts
 declare global {
   interface Window {
-    _affirm_config?: any;
+    _affirm_config?: {
+      public_api_key: string;
+      script: string;
+      locale: string;
+      country_code: string;
+    };
     affirm?: any;
   }
 }
 
-/**
- * Carga Affirm **siempre en producción**.
- * (Usamos el CDN de prod para evitar errores de clave pública inválida).
- */
+const AFFIRM_SCRIPT_URL = 'https://cdn1.affirm.com/js/v2/affirm.js';
+
 export function loadAffirm(publicKey: string): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     if (!publicKey) {
-      console.error('[Affirm] Falta VITE_AFFIRM_PUBLIC_KEY');
-      resolve();
+      reject(new Error('[Affirm] Missing VITE_AFFIRM_PUBLIC_KEY'));
       return;
     }
 
-    // CDN de producción (forzado)
-    const scriptUrl = 'https://cdn1.affirm.com/js/v2/affirm.js';
-
-    // Elimina scripts previos de Affirm que no coincidan
-    const existing = document.querySelectorAll<HTMLScriptElement>(
-      'script[src*="affirm.com/js/v2/affirm.js"]'
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      `script[src="${AFFIRM_SCRIPT_URL}"]`
     );
-    existing.forEach(s => {
-      if (s.src !== scriptUrl) s.remove();
-    });
 
-    // Si existe un affirm viejo (por sandbox, etc.), reseteamos
-    if ((window as any).affirm && (window as any)._affirm_config?.script !== scriptUrl) {
-      (window as any).affirm = undefined;
-    }
+    window._affirm_config = {
+      public_api_key: publicKey,
+      script: AFFIRM_SCRIPT_URL,
+      locale: 'en_US',
+      country_code: 'US',
+    };
 
-    // Si ya está cargado el correcto, resolvemos
-    if (window.affirm?.ui && window._affirm_config?.script === scriptUrl) {
+    if (window.affirm?.ui && existingScript) {
       try {
         window.affirm.ui.ready(() => resolve());
       } catch {
@@ -44,27 +40,37 @@ export function loadAffirm(publicKey: string): Promise<void> {
       return;
     }
 
-    // Configuración + inyección del script
-    window._affirm_config = {
-      public_api_key: publicKey,
-      script: scriptUrl,
-      locale: 'en_US',
-      country_code: 'US',
-    };
+    const oldScripts = document.querySelectorAll<HTMLScriptElement>(
+      'script[src*="affirm.com/js/v2/affirm.js"]'
+    );
 
-    console.log('[Affirm] env: prod cdn:', scriptUrl, 'pk:', publicKey.slice(0, 6) + '…');
+    oldScripts.forEach((script) => {
+      if (script.src !== AFFIRM_SCRIPT_URL) {
+        script.remove();
+      }
+    });
 
-    const s = document.createElement('script');
-    s.async = true;
-    s.src = scriptUrl;
-    s.onload = () => {
+    const script = existingScript || document.createElement('script');
+
+    script.async = true;
+    script.src = AFFIRM_SCRIPT_URL;
+
+    script.onload = () => {
       if (window.affirm?.ui) {
         window.affirm.ui.ready(() => resolve());
       } else {
         resolve();
       }
     };
-    s.onerror = reject;
-    document.head.appendChild(s);
+
+    script.onerror = () => {
+      reject(new Error('[Affirm] Failed to load Affirm script'));
+    };
+
+    if (!existingScript) {
+      document.head.appendChild(script);
+    }
   });
 }
+
+export {};

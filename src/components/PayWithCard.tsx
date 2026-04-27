@@ -1,4 +1,3 @@
-// src/components/PayWithCard.tsx
 import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { startCardCheckout } from "../lib/cardCheckout";
@@ -19,37 +18,50 @@ const PayWithCard: React.FC = () => {
 
       setLoading(true);
       await startCardCheckout(items);
-      // Stripe hace el redirect
     } catch (e: any) {
       console.error(e);
-      setError(
-        e?.message || "An error occurred while starting the payment."
-      );
+      setError(e?.message || "Payment error. Try again.");
       setLoading(false);
     }
   };
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
+      {/* BUTTON */}
       <button
         type="button"
         onClick={handleClick}
         disabled={loading || !items.length}
-        className="w-full rounded-md bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+        className="
+          w-full
+          bg-white/5
+          border border-white/10
+          text-white
+          py-3
+          rounded-xl
+          font-bold
+          hover:bg-white/10
+          transition
+          disabled:opacity-50
+        "
       >
-        {loading
-          ? "Redirecting to card payment…"
-          : "Pay by card (credit/debit)"}
+        {loading ? "Redirecting..." : "Pay with card"}
       </button>
 
-      <p className="text-xs text-slate-500">
+      {/* TOTAL */}
+      <p className="text-xs text-white/50 text-center">
         Total:{" "}
-        <span className="font-semibold">
-          ${totalUSD.toFixed(2)} USD
+        <span className="font-bold text-[#d8b98c]">
+          ${totalUSD.toFixed(2)}
         </span>
       </p>
 
-      {error && <p className="text-xs text-red-500">{error}</p>}
+      {/* ERROR */}
+      {error && (
+        <p className="text-xs text-red-400 text-center">
+          {error}
+        </p>
+      )}
     </div>
   );
 };

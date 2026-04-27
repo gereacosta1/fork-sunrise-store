@@ -20,7 +20,6 @@ const CartDrawer: React.FC = () => {
     setQty(id, qty + 1);
   };
 
-  // 🔥 fallback por si faltan traducciones
   const safeT = (key: string, fallback: string) => {
     const val = t(key);
     return val === key ? fallback : val;
@@ -28,7 +27,9 @@ const CartDrawer: React.FC = () => {
 
   return (
     <div
-      className={`fixed inset-0 z-[10000] ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+      className={`fixed inset-0 z-[10000] ${
+        isOpen ? 'pointer-events-auto' : 'pointer-events-none'
+      }`}
     >
       {/* BACKDROP */}
       <div
@@ -56,6 +57,7 @@ const CartDrawer: React.FC = () => {
           </div>
 
           <button
+            type="button"
             onClick={close}
             className="rounded-full border border-white/10 bg-white/5 p-2 hover:bg-white/10 transition"
           >
@@ -76,13 +78,14 @@ const CartDrawer: React.FC = () => {
             </div>
           ) : (
             <div className="space-y-4">
-              {items.map((it) => {
+              {items.map((it, index) => {
                 const price = Number(it.price) || 0;
                 const qty = Number(it.qty) || 1;
+                const subtotal = price * qty;
 
                 return (
                   <div
-                    key={it.id}
+                    key={`${it.id}-${index}`} // 🔥 FIX IMPORTANTE
                     className="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3"
                   >
                     <img
@@ -100,7 +103,10 @@ const CartDrawer: React.FC = () => {
                           </p>
                         </div>
 
-                        <button onClick={() => removeItem(it.id)}>
+                        <button
+                          type="button"
+                          onClick={() => removeItem(it.id)}
+                        >
                           <Trash2 className="w-4 h-4 text-white/60 hover:text-white" />
                         </button>
                       </div>
@@ -108,6 +114,7 @@ const CartDrawer: React.FC = () => {
                       {/* QTY */}
                       <div className="mt-3 flex items-center gap-2">
                         <button
+                          type="button"
                           onClick={() => handleDec(it.id, qty)}
                           className="bg-white/10 p-2 rounded-lg"
                         >
@@ -119,6 +126,7 @@ const CartDrawer: React.FC = () => {
                         </span>
 
                         <button
+                          type="button"
                           onClick={() => handleInc(it.id, qty)}
                           className="bg-white/10 p-2 rounded-lg"
                         >
@@ -126,7 +134,7 @@ const CartDrawer: React.FC = () => {
                         </button>
 
                         <span className="ml-auto font-black">
-                          {fmtMoney(price * qty)}
+                          {fmtMoney(subtotal)}
                         </span>
                       </div>
                     </div>
@@ -150,6 +158,7 @@ const CartDrawer: React.FC = () => {
 
           {/* CLEAR */}
           <button
+            type="button"
             onClick={clear}
             disabled={!items.length}
             className="w-full bg-white/5 py-3 rounded-xl font-bold hover:bg-white/10 disabled:opacity-40"

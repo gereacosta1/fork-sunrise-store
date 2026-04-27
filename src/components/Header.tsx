@@ -1,4 +1,3 @@
-// src/components/Header.tsx
 import React, { useState } from 'react';
 import { Menu, X, Phone, MapPin, ShoppingCart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -26,22 +25,27 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
   ];
 
   const handlePhoneCall = () => window.open('tel:+17862993771', '_self');
-  const handleLogoClick = () => onNavigate('inicio');
+
+  const handleNavigate = (id: string) => {
+    onNavigate(id);
+    setIsMenuOpen(false); // 🔥 FIX UX
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#9b7a55]/40">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
 
           {/* LOGO */}
           <button
-            onClick={handleLogoClick}
-            className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300"
+            onClick={() => handleNavigate('inicio')}
+            className="flex items-center space-x-3 group"
+            type="button"
           >
             <img
               src="/IMG/guzzies-riv-logo-furniture.jpeg"
               alt="Guzzies Riv"
-              className="w-12 h-12 object-contain"
+              className="w-11 h-11 object-contain group-hover:scale-105 transition"
             />
 
             <div className="text-left">
@@ -59,14 +63,15 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
             {menuItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => onNavigate(item.id)}
-                className={`relative text-base font-semibold transition-all duration-300 ${
+                onClick={() => handleNavigate(item.id)}
+                type="button"
+                className={`text-[15px] font-semibold transition-all duration-300 ${
                   activeSection === item.id
                     ? 'text-[#d8b98c]'
-                    : 'text-white hover:text-[#d8b98c]'
+                    : 'text-white/70 hover:text-white'
                 }`}
               >
-                <UnderlineGrow>
+                <UnderlineGrow active={activeSection === item.id}>
                   {item.label}
                 </UnderlineGrow>
               </button>
@@ -75,9 +80,11 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
             {/* CART */}
             <button
               onClick={open}
-              className="relative text-white hover:text-[#d8b98c] transition"
+              type="button"
+              className="relative text-white/70 hover:text-white transition"
             >
               <ShoppingCart className="w-5 h-5" />
+
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-3 bg-[#9b7a55] text-white text-xs font-bold rounded-full px-2 py-0.5">
                   {cartCount}
@@ -88,19 +95,21 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
             <LangToggle />
           </nav>
 
-          {/* CONTACT */}
-          <div className="hidden lg:flex items-center space-x-6 text-white">
+          {/* RIGHT SIDE */}
+          <div className="hidden lg:flex items-center space-x-6 text-white/70">
             <button
               onClick={handlePhoneCall}
-              className="flex items-center space-x-2 hover:text-[#d8b98c]"
+              type="button"
+              className="flex items-center space-x-2 hover:text-white transition"
             >
               <Phone className="w-4 h-4 text-[#d8b98c]" />
               <span className="text-sm">786-299-3771</span>
             </button>
 
             <button
-              onClick={() => onNavigate('contacto')}
-              className="flex items-center space-x-2 hover:text-[#d8b98c]"
+              onClick={() => handleNavigate('contacto')}
+              type="button"
+              className="flex items-center space-x-2 hover:text-white transition"
             >
               <MapPin className="w-4 h-4 text-[#d8b98c]" />
               <span className="text-sm">Miami, FL</span>
@@ -109,8 +118,14 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
 
           {/* MOBILE */}
           <div className="md:hidden flex items-center space-x-4">
-            <button onClick={open} className="relative text-white">
+
+            <button
+              onClick={open}
+              type="button"
+              className="relative text-white"
+            >
               <ShoppingCart className="w-6 h-6" />
+
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-2 bg-[#9b7a55] text-white text-[10px] font-bold rounded-full px-1.5 py-[2px]">
                   {cartCount}
@@ -120,7 +135,12 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
 
             <LangToggle />
 
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              type="button"
+              className="text-white"
+              aria-label="Toggle menu"
+            >
               {isMenuOpen ? <X /> : <Menu />}
             </button>
           </div>
@@ -132,19 +152,17 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
             isMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="border-t border-[#9b7a55]/40 pt-4 backdrop-blur-md bg-black/80 rounded-xl">
+          <div className="border border-white/10 bg-black/90 backdrop-blur-xl rounded-xl">
             <nav className="flex flex-col">
               {menuItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => {
-                    onNavigate(item.id);
-                    setIsMenuOpen(false);
-                  }}
+                  onClick={() => handleNavigate(item.id)}
+                  type="button"
                   className={`text-left py-3 px-4 transition ${
                     activeSection === item.id
                       ? 'text-[#d8b98c] bg-white/5'
-                      : 'text-white hover:bg-white/5'
+                      : 'text-white/70 hover:bg-white/5'
                   }`}
                 >
                   {item.label}
@@ -153,6 +171,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
             </nav>
           </div>
         </div>
+
       </div>
     </header>
   );

@@ -16,25 +16,25 @@ const services = [
     id: 'living',
     icon: Sofa,
     title: 'Living Room',
-    desc: 'Modern sofas, tables and accent pieces designed for comfort and style.',
+    desc: 'Modern sofas and pieces focused on comfort and clean aesthetics.',
   },
   {
     id: 'bedroom',
     icon: Bed,
     title: 'Bedroom',
-    desc: 'Elegant bedroom furniture for a calm and relaxing environment.',
+    desc: 'Elegant furniture designed for relaxation and balance.',
   },
   {
     id: 'dining',
     icon: Utensils,
     title: 'Dining',
-    desc: 'Dining tables and chairs with clean lines and premium finishes.',
+    desc: 'Tables and chairs with modern finishes and premium materials.',
   },
   {
     id: 'decor',
     icon: Sparkles,
     title: 'Decor',
-    desc: 'Finishing touches that elevate your interior design.',
+    desc: 'Details that elevate your entire interior space.',
   },
 ];
 
@@ -50,9 +50,15 @@ const About: React.FC = () => {
   };
 
   return (
-    <section id="nosotros" className="py-24 bg-black">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+    <section id="nosotros" className="py-24 bg-black relative overflow-hidden">
+
+      {/* 🔥 background glow sutil */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(216,185,140,0.08),transparent_40%)]" />
+
+      <div className="container mx-auto px-4 relative z-10">
+
+        {/* HEADER */}
+        <div className="text-center mb-20">
           <p className="mb-4 text-sm uppercase tracking-[0.35em] text-[#d8b98c] font-bold">
             GUZZIES RIV LLC
           </p>
@@ -62,12 +68,15 @@ const About: React.FC = () => {
           </h2>
 
           <p className="text-white/70 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-            GUZZIES RIV is a furniture store in Miami focused on modern design,
-            premium materials and timeless style for your home.
+            A Miami-based furniture brand focused on modern design, premium materials
+            and timeless style for your home.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
+        {/* MAIN BLOCK */}
+        <div className="grid md:grid-cols-2 gap-14 items-center mb-28">
+
+          {/* TEXT */}
           <div>
             <h3 className="text-3xl md:text-4xl font-black text-white mb-6">
               Designed for modern living
@@ -75,20 +84,19 @@ const About: React.FC = () => {
 
             <p className="text-white/70 mb-4 leading-relaxed">
               We create spaces that feel comfortable, elegant and functional.
-              Every piece in our collection is selected to bring balance between
-              design and usability.
+              Every piece is selected to balance design and usability.
             </p>
 
             <p className="text-white/70 mb-8 leading-relaxed">
-              From sofas to full interior setups, our goal is to help you transform
-              your space into something unique.
+              From sofas to full interior setups, our goal is to transform
+              your space into something unique and modern.
             </p>
 
             <div className="flex flex-wrap gap-3">
               {['Premium Materials', 'Modern Design', 'Miami Delivery'].map((item) => (
                 <span
                   key={item}
-                  className="bg-[#9b7a55] text-white px-5 py-2.5 rounded-full text-sm font-semibold"
+                  className="bg-[#9b7a55] text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg"
                 >
                   {item}
                 </span>
@@ -96,22 +104,24 @@ const About: React.FC = () => {
             </div>
           </div>
 
+          {/* IMAGE SLIDER */}
           <div className="relative rounded-3xl border border-[#9b7a55]/25 bg-[#0c0c0c] p-4 shadow-2xl">
+
             <div className="relative overflow-hidden rounded-2xl bg-[#f6efe7]">
+
               <img
                 src={storeImages[currentImageIndex]}
                 alt="Furniture showcase"
-                className="w-full h-[360px] md:h-[430px] object-contain p-6"
+                className="w-full h-[360px] md:h-[430px] object-contain p-6 transition-all duration-500"
                 onError={(e) => {
                   e.currentTarget.src = '/IMG/guzzies-riv-logo-furniture.jpeg';
                 }}
               />
 
+              {/* botones */}
               <button
                 onClick={prevImage}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black text-white p-3 rounded-full transition"
-                type="button"
-                aria-label="Previous furniture image"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -119,17 +129,29 @@ const About: React.FC = () => {
               <button
                 onClick={nextImage}
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black text-white p-3 rounded-full transition"
-                type="button"
-                aria-label="Next furniture image"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
+
+              {/* 🔥 dots indicador */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {storeImages.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-2.5 h-2.5 rounded-full ${
+                      i === currentImageIndex ? 'bg-[#d8b98c]' : 'bg-white/40'
+                    }`}
+                  />
+                ))}
+              </div>
+
             </div>
           </div>
         </div>
 
+        {/* SERVICES */}
         <div>
-          <h3 className="text-3xl md:text-4xl font-black text-white text-center mb-12">
+          <h3 className="text-3xl md:text-4xl font-black text-white text-center mb-14">
             <UnderlineGrow>Our Collection</UnderlineGrow>
           </h3>
 
@@ -140,7 +162,7 @@ const About: React.FC = () => {
               return (
                 <div
                   key={service.id}
-                  className="bg-[#0c0c0c] border border-white/10 p-6 rounded-2xl hover:border-[#9b7a55]/40 hover:-translate-y-1 transition-all duration-300"
+                  className="bg-[#0c0c0c] border border-white/10 p-6 rounded-2xl hover:border-[#9b7a55]/40 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl"
                 >
                   <div className="w-12 h-12 rounded-2xl bg-[#9b7a55]/20 flex items-center justify-center mb-5">
                     <Icon className="w-6 h-6 text-[#d8b98c]" />
@@ -158,6 +180,7 @@ const About: React.FC = () => {
             })}
           </div>
         </div>
+
       </div>
     </section>
   );

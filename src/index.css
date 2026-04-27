@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* BASE */
+
 html {
   scroll-behavior: smooth;
 }
@@ -9,17 +11,24 @@ html {
 body {
   background: #000;
   color: #fff;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* SELECTION */
 
 ::selection {
   background: #9b7a55;
   color: #fff;
 }
 
+/* INPUTS */
+
 input,
 textarea,
 select {
   outline: none;
+  transition: all 0.2s ease;
 }
 
 input::placeholder,
@@ -27,15 +36,41 @@ textarea::placeholder {
   color: rgba(255, 255, 255, 0.45);
 }
 
+/* BOTONES */
+
 button {
   -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s ease;
 }
+
+/* IMAGES */
 
 img {
   max-width: 100%;
+  display: block;
 }
 
-/* Brand helpers */
+/* SCROLLBAR (🔥 mejora visual clave) */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9b7a55;
+}
+
+/* BRAND COLORS */
+
 .text-brand {
   color: #d8b98c;
 }
@@ -46,4 +81,40 @@ img {
 
 .bg-brand-hover {
   background-color: #7c6043;
+}
+
+/* UTILIDADES EXTRA */
+
+.glow-brand {
+  box-shadow: 0 0 30px rgba(216, 185, 140, 0.25);
+}
+
+.border-soft {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* INPUT STYLE GLOBAL */
+
+.input-base {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: white;
+}
+
+.input-base:focus {
+  border-color: #9b7a55;
+  box-shadow: 0 0 0 2px rgba(155, 122, 85, 0.2);
+}
+
+/* CARD EFFECT */
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }

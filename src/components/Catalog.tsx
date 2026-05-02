@@ -46,21 +46,190 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
   };
 
   const products: Product[] = [
-    { id: 1, name: 'Modern Fabric Sofa', brand: 'Guzzies Riv', model: 'Living Collection', year: 2026, condition: 'Nuevo', material: 'Fabric', category: 'Living Room', price: 1200, image: '/IMG/mueble1.jpg', featured: true, description: 'Modern sofa selected for comfort and clean living room style.', features: ['Soft', 'Modern', 'Comfort'] },
-    { id: 2, name: 'Yellow Accent Chair', brand: 'Guzzies Riv', model: 'Accent Collection', year: 2026, condition: 'Nuevo', material: 'Fabric', category: 'Living Room', price: 650, image: '/IMG/mueble2.jpg', description: 'Accent chair with a bold modern look for stylish interiors.', features: ['Comfort', 'Stylish', 'Accent'] },
-    { id: 3, name: 'Round Coffee Table', brand: 'Guzzies Riv', model: 'Table Collection', year: 2026, condition: 'Nuevo', material: 'Wood', category: 'Living Room', price: 320, image: '/IMG/mueble3.jpg', description: 'Minimal round coffee table for modern living spaces.', features: ['Compact', 'Wood', 'Minimal'] },
-    { id: 4, name: 'Dining Table', brand: 'Guzzies Riv', model: 'Dining Collection', year: 2026, condition: 'Nuevo', material: 'Wood', category: 'Dining', price: 950, image: '/IMG/mueble4.jpg', description: 'Modern dining table with clean lines and stable construction.', features: ['Large', 'Modern', 'Stable'] },
-    { id: 5, name: 'Dining Chair Set', brand: 'Guzzies Riv', model: 'Dining Collection', year: 2026, condition: 'Nuevo', material: 'Fabric', category: 'Dining', price: 540, image: '/IMG/mueble5.jpg', description: 'Comfortable dining chair set with elegant modern style.', features: ['Set', 'Comfort', 'Elegant'] },
-    { id: 6, name: 'Bed Frame', brand: 'Guzzies Riv', model: 'Bedroom Collection', year: 2026, condition: 'Nuevo', material: 'Fabric', category: 'Bedroom', price: 1350, image: '/IMG/mueble6.jpg', description: 'Modern bed frame designed for comfort and bedroom style.', features: ['Queen', 'Soft', 'Modern'] },
-    { id: 7, name: 'Nightstand Table', brand: 'Guzzies Riv', model: 'Bedroom Collection', year: 2026, condition: 'Nuevo', material: 'Wood', category: 'Bedroom', price: 280, image: '/IMG/mueble7.jpg', description: 'Compact nightstand table with useful storage.', features: ['Compact', 'Storage'] },
-    { id: 8, name: 'Modern Dresser', brand: 'Guzzies Riv', model: 'Bedroom Collection', year: 2026, condition: 'Nuevo', material: 'Wood', category: 'Bedroom', price: 890, image: '/IMG/mueble8.jpg', description: 'Modern dresser with clean storage design.', features: ['Storage', 'Minimal'] },
-    { id: 9, name: 'TV Console Unit', brand: 'Guzzies Riv', model: 'Living Collection', year: 2026, condition: 'Nuevo', material: 'Wood', category: 'Living Room', price: 720, image: '/IMG/mueble9.jpg', description: 'Wide TV console unit for modern media setups.', features: ['Wide', 'Modern'] },
-    { id: 10, name: 'Bookshelf Unit', brand: 'Guzzies Riv', model: 'Office Collection', year: 2026, condition: 'Nuevo', material: 'Wood', category: 'Office', price: 610, image: '/IMG/mueble10.jpg', description: 'Bookshelf unit for storage, display and modern office spaces.', features: ['Shelves', 'Strong'] },
-    { id: 11, name: 'Office Desk', brand: 'Guzzies Riv', model: 'Office Collection', year: 2026, condition: 'Nuevo', material: 'Wood', category: 'Office', price: 480, image: '/IMG/mueble11.jpg', description: 'Clean office desk for home workspaces and study areas.', features: ['Desk', 'Clean'] },
-    { id: 12, name: 'Side Table', brand: 'Guzzies Riv', model: 'Accent Collection', year: 2026, condition: 'Nuevo', material: 'Wood', category: 'Living Room', price: 230, image: '/IMG/mueble4.jpg', description: 'Small side table for accent decor and daily use.', features: ['Small', 'Light'] },
-    { id: 13, name: 'Ottoman Seat', brand: 'Guzzies Riv', model: 'Comfort Collection', year: 2026, condition: 'Nuevo', material: 'Fabric', category: 'Living Room', price: 370, image: '/IMG/mueble2.jpg', description: 'Soft ottoman seat for extra comfort and flexible use.', features: ['Soft', 'Compact'] },
-    { id: 14, name: 'Decor Mirror', brand: 'Guzzies Riv', model: 'Decor Collection', year: 2026, condition: 'Nuevo', material: 'Glass', category: 'Decor', price: 430, image: '/IMG/mueble1.jpg', description: 'Decor mirror to elevate modern interiors.', features: ['Elegant', 'Tall'] },
-    { id: 15, name: 'Lounge Chair', brand: 'Guzzies Riv', model: 'Lounge Collection', year: 2026, condition: 'Nuevo', material: 'Fabric', category: 'Living Room', price: 520, image: '/IMG/mueble6.jpg', description: 'Lounge chair with comfortable proportions and modern style.', features: ['Comfort', 'Wide'] },
+    {
+      id: 1,
+      name: 'Noir Majestic Chair',
+      brand: 'Guzzies Riv',
+      model: 'Noir Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Velvet / Gold Finish',
+      category: 'Dining Room',
+      price: 1200,
+      image: '/IMG/noir-majestic-chair.jpeg',
+      featured: true,
+      description:
+        'A refined black dining chair with a majestic silhouette, soft upholstery and elegant gold details for premium interiors.',
+      features: ['Luxury', 'Velvet', 'Gold Accent'],
+    },
+    {
+      id: 2,
+      name: 'Imperium Gold Collection',
+      brand: 'Guzzies Riv',
+      model: 'Imperium Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Marble / Gold Finish',
+      category: 'Dining Room',
+      price: 2000,
+      image: '/IMG/imperium-gold-collection.jpeg',
+      featured: true,
+      description:
+        'A high-end dining collection with a sophisticated gold aesthetic, elegant seating and a polished statement presence.',
+      features: ['Premium', 'Gold', 'Dining Set'],
+    },
+    {
+      id: 3,
+      name: 'Nocturne Wardrobe',
+      brand: 'Guzzies Riv',
+      model: 'Nocturne Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Wood / Gold Hardware',
+      category: 'Bedroom',
+      price: 1600,
+      image: '/IMG/nocturne-wardrobe.jpeg',
+      description:
+        'A bold black wardrobe with refined gold hardware, designed for elegant storage and a modern luxury bedroom.',
+      features: ['Storage', 'Elegant', 'Statement'],
+    },
+    {
+      id: 4,
+      name: 'Modern Curve Luxury Sofa',
+      brand: 'Guzzies Riv',
+      model: 'Curve Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Boucle Fabric',
+      category: 'Living Room',
+      price: 900,
+      image: '/IMG/modern-curve-luxury-sofa.jpeg',
+      description:
+        'A sculptural curved sofa with soft texture and clean proportions, made to create a warm modern luxury living space.',
+      features: ['Curved', 'Soft', 'Modern'],
+    },
+    {
+      id: 5,
+      name: 'Safari Luxury Sofa',
+      brand: 'Guzzies Riv',
+      model: 'Safari Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Premium Fabric',
+      category: 'Living Room',
+      price: 1800,
+      image: '/IMG/safari-luxury-sofa.jpeg',
+      featured: true,
+      description:
+        'A premium sofa with warm tones, deep comfort and a bold modern look for sophisticated living rooms.',
+      features: ['Premium', 'Comfort', 'Modern'],
+    },
+    {
+      id: 6,
+      name: 'Elisian Dune Luxury Sofa',
+      brand: 'Guzzies Riv',
+      model: 'Elisian Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Premium Fabric',
+      category: 'Living Room',
+      price: 2000,
+      image: '/IMG/elisian-dune-luxury-sofa.jpeg',
+      description:
+        'A bright luxury sectional sofa with soft neutral tones, designed to elevate large living spaces with comfort and elegance.',
+      features: ['Sectional', 'Elegant', 'Spacious'],
+    },
+    {
+      id: 7,
+      name: 'Aurora Crystal Chandelier',
+      brand: 'Guzzies Riv',
+      model: 'Aurora Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Crystal / Gold Finish',
+      category: 'Lighting',
+      price: 1400,
+      image: '/IMG/aurora-crystal-chandelier.jpeg',
+      description:
+        'A luxury crystal chandelier with gold details, created to bring a dramatic and refined glow to premium interiors.',
+      features: ['Crystal', 'Gold', 'Luxury Light'],
+    },
+    {
+      id: 8,
+      name: 'Nebula Flux Chandelier',
+      brand: 'Guzzies Riv',
+      model: 'Nebula Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Metal / LED',
+      category: 'Lighting',
+      price: 900,
+      image: '/IMG/nebula-flux-chandelier.jpeg',
+      description:
+        'A modern sculptural chandelier with a futuristic LED design, perfect for contemporary luxury spaces.',
+      features: ['LED', 'Modern', 'Sculptural'],
+    },
+    {
+      id: 9,
+      name: 'Eclipse Dining Collection',
+      brand: 'Guzzies Riv',
+      model: 'Eclipse Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Stone / Upholstery',
+      category: 'Dining Room',
+      price: 3000,
+      image: '/IMG/eclipse-dining-collection.jpeg',
+      featured: true,
+      description:
+        'A complete premium dining collection with a strong architectural presence and refined modern materials.',
+      features: ['Dining Set', 'Premium', 'Statement'],
+    },
+    {
+      id: 10,
+      name: 'Ivory Aura Lounge',
+      brand: 'Guzzies Riv',
+      model: 'Ivory Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Boucle Fabric',
+      category: 'Living Room',
+      price: 650,
+      image: '/IMG/ivory-aura-lounge.jpeg',
+      description:
+        'A soft ivory lounge chair with a rounded silhouette, ideal for warm elegant corners and luxury living spaces.',
+      features: ['Soft', 'Ivory', 'Lounge'],
+    },
+    {
+      id: 11,
+      name: 'Ivory Mirage Chair',
+      brand: 'Guzzies Riv',
+      model: 'Mirage Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Fabric / Wood',
+      category: 'Accent Chair',
+      price: 350,
+      image: '/IMG/ivory-mirage-chair.jpeg',
+      description:
+        'A minimal ivory accent chair with warm wood arms, designed for clean, calm and elegant interiors.',
+      features: ['Accent', 'Minimal', 'Warm Wood'],
+    },
+    {
+      id: 12,
+      name: 'Golden Mirage Sculptural Mirror',
+      brand: 'Guzzies Riv',
+      model: 'Golden Mirage Collection',
+      year: 2026,
+      condition: 'Nuevo',
+      material: 'Mirror / Gold Frame',
+      category: 'Decor',
+      price: 2400,
+      image: '/IMG/golden-mirage-mirror.jpeg',
+      description:
+        'A sculptural gold mirror with a premium artistic frame, made to become the focal point of any luxury room.',
+      features: ['Gold', 'Sculptural', 'Decor'],
+    },
   ];
 
   const toggleFavorite = (id: number) => {
@@ -70,35 +239,46 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
   };
 
   return (
-    <section id="catalogo" className="py-28 bg-black">
-      <div className="container mx-auto px-4">
+    <section id="catalogo" className="relative py-28 bg-black overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(216,185,140,0.12),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(155,122,85,0.10),transparent_30%)] pointer-events-none" />
+
+      <div className="container relative z-10 mx-auto px-4">
         <div className="text-center mb-20">
+          <p className="text-[#d8b98c] text-sm font-black tracking-[0.35em] uppercase mb-4">
+            Guzzies Riv LLC
+          </p>
+
           <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
-            <UnderlineGrow active>Furniture Collection</UnderlineGrow>
+            <UnderlineGrow active>Luxury Collection</UnderlineGrow>
           </h2>
 
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Modern pieces designed to elevate your space
+            High-end furniture and decor pieces designed to elevate modern interiors.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-12">
           {products.map((product) => (
             <div
               key={product.id}
-              className="group bg-[#0b0b0b] border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] hover:border-[#9b7a55]/40"
+              className="group relative bg-[#0b0b0b] border border-white/10 rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_80px_rgba(0,0,0,0.75)] hover:border-[#d8b98c]/45"
             >
-              <div className="relative bg-gradient-to-b from-[#111] to-[#0b0b0b] flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.035] via-transparent to-[#d8b98c]/[0.045] opacity-70 pointer-events-none" />
+
+              <div className="relative h-[360px] bg-gradient-to-b from-[#15120f] via-[#0d0d0d] to-[#080808] flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-6 rounded-[2rem] border border-white/[0.04] bg-black/20" />
+
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-80 object-contain p-8 transition duration-500 group-hover:scale-105"
+                  className="relative z-10 w-full h-full object-contain p-8 transition duration-700 group-hover:scale-105"
                 />
 
                 <button
                   type="button"
                   onClick={() => toggleFavorite(product.id)}
-                  className="absolute top-4 right-4 bg-black/60 p-2 rounded-full"
+                  className="absolute top-4 right-4 z-20 bg-black/70 border border-white/10 p-2.5 rounded-full backdrop-blur-md hover:bg-black transition"
+                  aria-label={`Add ${product.name} to favorites`}
                 >
                   <Heart
                     className="w-5 h-5"
@@ -108,29 +288,40 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
                 </button>
 
                 {product.featured && (
-                  <div className="absolute top-4 left-4 bg-[#9b7a55] text-white px-3 py-1 rounded-full text-xs font-bold">
+                  <div className="absolute top-4 left-4 z-20 bg-[#9b7a55] text-white px-3 py-1 rounded-full text-xs font-black tracking-wide">
                     Featured
                   </div>
                 )}
               </div>
 
-              <div className="p-6 flex flex-col gap-4">
+              <div className="relative z-10 p-6 flex flex-col gap-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white">{product.name}</h3>
-                  <p className="text-sm text-white/40">{product.category}</p>
+                  <p className="text-[#d8b98c] text-xs font-bold tracking-[0.2em] uppercase mb-2">
+                    {product.category}
+                  </p>
+
+                  <h3 className="text-2xl font-black text-white leading-tight">
+                    {product.name}
+                  </h3>
+
+                  <p className="text-sm text-white/40 mt-1">{product.model}</p>
                 </div>
 
-                <p className="text-2xl font-black text-[#d8b98c]">
+                <p className="text-3xl font-black text-[#d8b98c]">
                   ${product.price.toLocaleString()}
                 </p>
 
+                <p className="text-sm text-white/55 leading-relaxed line-clamp-3">
+                  {product.description}
+                </p>
+
                 <div className="flex flex-wrap gap-2">
-                  {product.features?.slice(0, 3).map((f, i) => (
+                  {product.features?.slice(0, 3).map((feature, index) => (
                     <span
-                      key={i}
-                      className="text-xs bg-white/[0.04] px-2 py-1 rounded text-white/70"
+                      key={index}
+                      className="text-xs bg-white/[0.05] border border-white/[0.06] px-2.5 py-1 rounded-full text-white/70"
                     >
-                      {f}
+                      {feature}
                     </span>
                   ))}
                 </div>
@@ -139,7 +330,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
                   <button
                     type="button"
                     onClick={() => onViewDetails(product)}
-                    className="bg-white/[0.04] py-2 rounded-xl font-semibold hover:bg-white/10 transition"
+                    className="bg-white/[0.05] text-white py-2.5 rounded-xl font-semibold hover:bg-white/10 transition"
                   >
                     <Eye className="inline w-4 h-4 mr-2" />
                     View details
@@ -160,7 +351,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
                       open();
                       showToast('Added to cart');
                     }}
-                    className="bg-[#9b7a55] py-3 rounded-xl font-bold hover:bg-[#7c6043] transition"
+                    className="bg-[#9b7a55] text-white py-3 rounded-xl font-black hover:bg-[#7c6043] transition shadow-[0_12px_30px_rgba(155,122,85,0.22)]"
                   >
                     Add to cart
                   </button>

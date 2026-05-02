@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
   const { open, items } = useCart();
   const { t } = useI18n();
 
-  const cartCount = items.reduce((sum, it) => sum + it.qty, 0);
+  const cartCount = items.reduce((sum, item) => sum + item.qty, 0);
 
   const menuItems = [
     { id: 'inicio', label: t('nav.home') || 'Home' },
@@ -24,41 +24,48 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
     { id: 'contacto', label: t('nav.contact') || 'Contact' },
   ];
 
-  const handlePhoneCall = () => window.open('tel:+17862993771', '_self');
+  const handlePhoneCall = () => {
+    window.open('tel:+17862993771', '_self');
+  };
 
   const handleNavigate = (id: string) => {
     onNavigate(id);
-    setIsMenuOpen(false); // 🔥 FIX UX
+    setIsMenuOpen(false);
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/85 backdrop-blur-xl border-b border-white/10">
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#d8b98c]/35 to-transparent" />
+
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-
-          {/* LOGO */}
           <button
             onClick={() => handleNavigate('inicio')}
             className="flex items-center space-x-3 group"
             type="button"
+            aria-label="Go to home"
           >
-            <img
-              src="/IMG/guzzies-riv-logo-furniture.jpeg"
-              alt="Guzzies Riv"
-              className="w-11 h-11 object-contain group-hover:scale-105 transition"
-            />
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full bg-[#d8b98c]/20 blur-md opacity-0 group-hover:opacity-100 transition" />
+
+              <img
+                src="/IMG/guzzies-riv-logo-furniture.jpeg"
+                alt="Guzzies Riv"
+                className="relative w-11 h-11 object-contain rounded-sm group-hover:scale-105 transition"
+              />
+            </div>
 
             <div className="text-left">
-              <h1 className="text-lg font-bold text-white tracking-wide">
+              <h1 className="text-lg font-black text-white tracking-wide leading-tight">
                 GUZZIES RIV
               </h1>
-              <p className="text-xs text-[#d8b98c] tracking-wide">
-                Furniture · Miami
+
+              <p className="text-xs text-[#d8b98c] tracking-[0.14em] uppercase">
+                Luxury Furniture · Miami
               </p>
             </div>
           </button>
 
-          {/* NAV DESKTOP */}
           <nav className="hidden md:flex items-center space-x-8">
             {menuItems.map((item) => (
               <button
@@ -77,11 +84,11 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
               </button>
             ))}
 
-            {/* CART */}
             <button
               onClick={open}
               type="button"
               className="relative text-white/70 hover:text-white transition"
+              aria-label="Open cart"
             >
               <ShoppingCart className="w-5 h-5" />
 
@@ -95,7 +102,6 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
             <LangToggle />
           </nav>
 
-          {/* RIGHT SIDE */}
           <div className="hidden lg:flex items-center space-x-6 text-white/70">
             <button
               onClick={handlePhoneCall}
@@ -116,13 +122,12 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
             </button>
           </div>
 
-          {/* MOBILE */}
           <div className="md:hidden flex items-center space-x-4">
-
             <button
               onClick={open}
               type="button"
               className="relative text-white"
+              aria-label="Open cart"
             >
               <ShoppingCart className="w-6 h-6" />
 
@@ -136,7 +141,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
             <LangToggle />
 
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => setIsMenuOpen((prev) => !prev)}
               type="button"
               className="text-white"
               aria-label="Toggle menu"
@@ -146,13 +151,12 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
           </div>
         </div>
 
-        {/* MOBILE MENU */}
         <div
           className={`md:hidden transition-all duration-300 overflow-hidden ${
             isMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="border border-white/10 bg-black/90 backdrop-blur-xl rounded-xl">
+          <div className="border border-white/10 bg-black/95 backdrop-blur-xl rounded-xl overflow-hidden">
             <nav className="flex flex-col">
               {menuItems.map((item) => (
                 <button
@@ -168,10 +172,17 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
                   {item.label}
                 </button>
               ))}
+
+              <button
+                onClick={handlePhoneCall}
+                type="button"
+                className="text-left py-3 px-4 text-white/70 hover:bg-white/5 transition border-t border-white/10"
+              >
+                Call 786-299-3771
+              </button>
             </nav>
           </div>
         </div>
-
       </div>
     </header>
   );

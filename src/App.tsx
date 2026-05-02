@@ -46,7 +46,7 @@ function AppInner() {
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent(
-      'Hola, me interesa información sobre sus muebles. ¿Podrían ayudarme?'
+      'Hello, I am interested in your luxury furniture collection. Could you help me with more information?'
     );
 
     window.open(`https://wa.me/17862993771?text=${message}`, '_blank', 'noopener,noreferrer');
@@ -54,7 +54,7 @@ function AppInner() {
 
   const handleEmail = () => {
     window.open(
-      'mailto:guzziesriv@gmail.com?subject=Consulta sobre muebles',
+      'mailto:guzziesriv@gmail.com?subject=Luxury furniture inquiry',
       '_self'
     );
   };

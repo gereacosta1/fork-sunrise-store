@@ -11,16 +11,18 @@ import {
 } from 'lucide-react';
 import UnderlineGrow from './UnderlineGrow';
 
+const img = (fileName: string) => `${import.meta.env.BASE_URL}IMG/${fileName}`;
+
 const storeImages = [
-  '/IMG/elisian-dune-luxury-sofa.jpeg',
-  '/IMG/safari-luxury-sofa.jpeg',
-  '/IMG/modern-curve-luxury-sofa.jpeg',
-  '/IMG/imperium-gold-collection.jpeg',
-  '/IMG/eclipse-dining-collection.jpeg',
-  '/IMG/nocturne-wardrobe.jpeg',
-  '/IMG/aurora-crystal-chandelier.jpeg',
-  '/IMG/nebula-flux-chandelier.jpeg',
-  '/IMG/golden-mirage-mirror.jpeg',
+  img('elisian-dune-luxury-sofa.jpg'),
+  img('safari-luxury-sofa.jpg'),
+  img('modern-curve-luxury-sofa.jpg'),
+  img('imperium-gold-collection.jpg'),
+  img('eclipse-dining-collection.jpg'),
+  img('nocturne-wardrobe.jpg'),
+  img('aurora-crystal-chandelier.jpg'),
+  img('nebula-flux-chandelier.jpg'),
+  img('golden-mirage-mirror.jpg'),
 ];
 
 const services = [
@@ -130,7 +132,8 @@ const About: React.FC = () => {
                 alt="Guzzies Riv luxury furniture showcase"
                 className="w-full h-[360px] md:h-[450px] object-contain p-5 transition-all duration-500"
                 onError={(e) => {
-                  e.currentTarget.src = '/IMG/guzzies-riv-logo-furniture.jpeg';
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = img('guzzies-riv-logo-furniture.jpeg');
                 }}
               />
 

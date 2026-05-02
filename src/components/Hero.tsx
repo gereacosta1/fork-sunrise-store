@@ -13,6 +13,8 @@ interface HeroProps {
   onNavigate: (section: string) => void;
 }
 
+const img = (fileName: string) => `${import.meta.env.BASE_URL}IMG/${fileName}`;
+
 const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   return (
     <section
@@ -21,9 +23,13 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     >
       <div className="absolute inset-0 z-0">
         <img
-          src="/IMG/elisian-dune-luxury-sofa.jpeg"
+          src={img('elisian-dune-luxury-sofa.jpg')}
           alt="Guzzies Riv luxury furniture"
           className="w-full h-full object-cover object-center opacity-70 scale-105"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = img('guzzies-riv-logo-furniture.jpeg');
+          }}
         />
 
         <div className="absolute inset-0 bg-gradient-to-r from-[#040302] via-[#040302]/88 to-[#040302]/35" />

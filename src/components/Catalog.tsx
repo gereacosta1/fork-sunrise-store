@@ -13,6 +13,8 @@ interface CatalogProps {
   onViewDetails: (product: Motorcycle) => void;
 }
 
+const img = (fileName: string) => `${import.meta.env.BASE_URL}IMG/${fileName}`;
+
 function SimpleToast({
   show,
   text,
@@ -56,7 +58,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Velvet / Gold Finish',
       category: 'Dining Room',
       price: 1200,
-      image: '/IMG/noir-majestic-chair.jpg',
+      image: img('noir-majestic-chair.jpg'),
       featured: true,
       description:
         'A refined black dining chair with a majestic silhouette, soft upholstery and elegant gold details for premium interiors.',
@@ -72,7 +74,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Marble / Gold Finish',
       category: 'Dining Room',
       price: 2000,
-      image: '/IMG/imperium-gold-collection.jpg',
+      image: img('imperium-gold-collection.jpg'),
       featured: true,
       description:
         'A high-end dining collection with a sophisticated gold aesthetic, elegant seating and a polished statement presence.',
@@ -88,7 +90,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Wood / Gold Hardware',
       category: 'Bedroom',
       price: 1600,
-      image: '/IMG/nocturne-wardrobe.jpg',
+      image: img('nocturne-wardrobe.jpg'),
       description:
         'A bold black wardrobe with refined gold hardware, designed for elegant storage and a modern luxury bedroom.',
       features: ['Storage', 'Elegant', 'Statement'],
@@ -103,7 +105,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Boucle Fabric',
       category: 'Living Room',
       price: 900,
-      image: '/IMG/modern-curve-luxury-sofa.jpg',
+      image: img('modern-curve-luxury-sofa.jpg'),
       description:
         'A sculptural curved sofa with soft texture and clean proportions, made to create a warm modern luxury living space.',
       features: ['Curved', 'Soft', 'Modern'],
@@ -118,7 +120,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Premium Fabric',
       category: 'Living Room',
       price: 1800,
-      image: '/IMG/safari-luxury-sofa.jpg',
+      image: img('safari-luxury-sofa.jpg'),
       featured: true,
       description:
         'A premium sofa with warm tones, deep comfort and a bold modern look for sophisticated living rooms.',
@@ -134,7 +136,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Premium Fabric',
       category: 'Living Room',
       price: 2000,
-      image: '/IMG/elisian-dune-luxury-sofa.jpg',
+      image: img('elisian-dune-luxury-sofa.jpg'),
       description:
         'A bright luxury sectional sofa with soft neutral tones, designed to elevate large living spaces with comfort and elegance.',
       features: ['Sectional', 'Elegant', 'Spacious'],
@@ -149,7 +151,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Crystal / Gold Finish',
       category: 'Lighting',
       price: 1400,
-      image: '/IMG/aurora-crystal-chandelier.jpg',
+      image: img('aurora-crystal-chandelier.jpg'),
       description:
         'A luxury crystal chandelier with gold details, created to bring a dramatic and refined glow to premium interiors.',
       features: ['Crystal', 'Gold', 'Luxury Light'],
@@ -164,7 +166,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Metal / LED',
       category: 'Lighting',
       price: 900,
-      image: '/IMG/nebula-flux-chandelier.jpg',
+      image: img('nebula-flux-chandelier.jpg'),
       description:
         'A modern sculptural chandelier with a futuristic LED design, perfect for contemporary luxury spaces.',
       features: ['LED', 'Modern', 'Sculptural'],
@@ -179,7 +181,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Stone / Upholstery',
       category: 'Dining Room',
       price: 3000,
-      image: '/IMG/eclipse-dining-collection.jpg',
+      image: img('eclipse-dining-collection.jpg'),
       featured: true,
       description:
         'A complete premium dining collection with a strong architectural presence and refined modern materials.',
@@ -195,7 +197,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Boucle Fabric',
       category: 'Living Room',
       price: 650,
-      image: '/IMG/ivory-aura-lounge.jpg',
+      image: img('ivory-aura-lounge.jpg'),
       description:
         'A soft ivory lounge chair with a rounded silhouette, ideal for warm elegant corners and luxury living spaces.',
       features: ['Soft', 'Ivory', 'Lounge'],
@@ -210,7 +212,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Fabric / Wood',
       category: 'Accent Chair',
       price: 350,
-      image: '/IMG/ivory-mirage-chair.jpg',
+      image: img('ivory-mirage-chair.jpg'),
       description:
         'A minimal ivory accent chair with warm wood arms, designed for clean, calm and elegant interiors.',
       features: ['Accent', 'Minimal', 'Warm Wood'],
@@ -225,7 +227,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
       material: 'Mirror / Gold Frame',
       category: 'Decor',
       price: 2400,
-      image: '/IMG/golden-mirage-mirror.jpg',
+      image: img('golden-mirage-mirror.jpg'),
       description:
         'A sculptural gold mirror with a premium artistic frame, made to become the focal point of any luxury room.',
       features: ['Gold', 'Sculptural', 'Decor'],
@@ -234,7 +236,7 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((favoriteId) => favoriteId !== id) : [...prev, id]
     );
   };
 
@@ -273,7 +275,8 @@ const Catalog: React.FC<CatalogProps> = ({ onViewDetails }) => {
                   alt={product.name}
                   className="relative z-10 w-full h-full object-contain p-8 transition duration-700 group-hover:scale-105"
                   onError={(e) => {
-                    e.currentTarget.src = '/IMG/guzzies-riv-logo-furniture.jpeg';
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = img('guzzies-riv-logo-furniture.jpeg');
                   }}
                 />
 
